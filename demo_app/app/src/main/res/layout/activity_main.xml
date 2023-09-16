@@ -116,8 +116,7 @@
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
             app:menu="@menu/navigation"
-            app:itemIconTint="@drawable/selector"
-            app:itemTextColor="@drawable/selector"
+
             app:labelVisibilityMode="labeled"/>
 
     </LinearLayout>
