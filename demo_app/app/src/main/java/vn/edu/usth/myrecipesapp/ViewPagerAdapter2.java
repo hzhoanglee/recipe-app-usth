@@ -1,5 +1,7 @@
 package vn.edu.usth.myrecipesapp;
 
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -11,6 +13,7 @@ import vn.edu.usth.myrecipesapp.FragmentUI.FavoriteFragment;
 import vn.edu.usth.myrecipesapp.FragmentUI.HomeFragment;
 
 public class ViewPagerAdapter2 extends FragmentStateAdapter {
+
     public ViewPagerAdapter2(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
@@ -18,13 +21,36 @@ public class ViewPagerAdapter2 extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
+
         switch (position)
         {
-            case 0: return new HomeFragment();
-            case 1: return new ExploreFragment();
-            case 2: return new CategoryFragment();
-            case 3: return new FavoriteFragment();
-            default: return new HomeFragment();
+            case 0:
+                return new HomeFragment();
+            case 1:
+                return new ExploreFragment();
+            case 2:
+                return new CategoryFragment();
+            case 3:
+                return new FavoriteFragment();
+            default:
+                return new HomeFragment();
+        }
+    }
+
+    public String getTitle(int position)
+    {
+        switch (position)
+        {
+            case 0:
+                return "Home";
+            case 1:
+                return "Explore";
+            case 2:
+                return "Category";
+            case 3:
+                return "Favorite";
+            default:
+                return "Home";
         }
     }
 
