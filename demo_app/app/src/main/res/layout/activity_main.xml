@@ -92,7 +92,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -110,7 +110,7 @@
         <!-- Bottom Navigation View -->
         <!-- Use drawable/selector.xml for itemBackground, itemIconTint, and itemTextColor -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navigation"
+            android:id="@+id/bottom_navigation"
             style="@style/MyBottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
