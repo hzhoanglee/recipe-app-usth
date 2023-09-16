@@ -22,7 +22,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
+                android:background="@color/colorPrimary"
                 android:paddingEnd="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -107,13 +107,18 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
+        <!-- Bottom Navigation View -->
+        <!-- Use drawable/selector.xml for itemBackground, itemIconTint, and itemTextColor -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
             style="@style/MyBottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
-            app:menu="@menu/navigation" />
+            app:menu="@menu/navigation"
+            app:itemIconTint="@drawable/selector"
+            app:itemTextColor="@drawable/selector"
+            app:labelVisibilityMode="labeled"/>
 
     </LinearLayout>
 

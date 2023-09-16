@@ -94,6 +94,7 @@
     </style>
 
     <style name="MyBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+
         <item name="itemTextAppearanceActive">@style/MyBottomNavigationView.TextAppearance</item>
         <item name="itemTextAppearanceInactive">@style/MyBottomNavigationView.TextAppearance</item>
     </style>

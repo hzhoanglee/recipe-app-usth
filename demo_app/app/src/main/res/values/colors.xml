@@ -6,6 +6,7 @@
     <color name="colorPrimaryDark">#AD1457</color>
     <color name="colorAccent">#f94d87</color>
     <color name="colorBackgroundLight">#FFFFFF</color>
+    <color name="selectorInactive">#991c1b1f</color>
 
     <!--dark theme color-->
     <color name="colorStatusBarDark">#0F1D24</color>
