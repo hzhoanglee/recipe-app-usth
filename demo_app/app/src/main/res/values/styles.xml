@@ -11,6 +11,7 @@
         <item name="android:windowBackground">@color/colorBackgroundLight</item>
         <item name="actionBarTheme">@style/ToolBarTheme</item>
         <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:statusBarColor" >@color/colorPrimary</item>
     </style>
 
     <style name="BaseDarkTheme" parent="Theme.MaterialComponents.NoActionBar">
@@ -21,6 +22,7 @@
         <item name="android:windowBackground">@color/colorBackgroundDark</item>
         <item name="actionBarTheme">@style/ToolBarDarkTheme</item>
         <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:statusBarColor" >@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -102,7 +104,6 @@
         <!-- set text color and icon color when item is not selected -->
         <item name="itemRippleColor">@color/colorAccent</item>
         <item name="labelVisibilityMode">labeled</item>
-
     </style>
 
     <style name="MyBottomNavigationView.TextAppearance" parent="TextAppearance.MaterialComponents.Caption">

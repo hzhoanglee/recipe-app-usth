@@ -3,6 +3,7 @@
     <style name="Base.Theme.MyRecipesApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
 
     <style name="Theme.MyRecipesApp" parent="Base.Theme.MyRecipesApp" />
