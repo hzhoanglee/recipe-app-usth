@@ -1,8 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MyRecipesApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.DemoApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryDark</item>
+        <item name="android:statusBarColor" >@color/TopBarDarkDeepDark</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+        <!-- app bar color -->
+        <item name="colorPrimary">@color/TopBarDark</item>
+
     </style>
+
+    <style name="ScreenBackground"><item name="android:background">@color/MainDarkBackground</item></style>
+    <style name="TextColorFont">
+        <item name="android:textColor">@color/MainDarkText</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+    </style>
+
+    <style name="BottomBarNavigator" parent="Widget.Design.BottomNavigationView">
+        <item name="backgroundTint">@color/BottomBarDark</item>
+        <item name="itemIconTint">@color/selector_dark</item>
+        <item name="itemTextColor">@color/selector_dark</item>
+    </style>
+
 </resources>

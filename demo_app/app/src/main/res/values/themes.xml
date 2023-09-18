@@ -1,10 +1,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MyRecipesApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.DemoApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="android:statusBarColor" >@color/TopBarLight</item>
+
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:fontFamily">@font/custom_font</item>
+
+        <!-- app bar color -->
+        <item name="colorPrimary">@color/TopBarLight</item>
+
     </style>
 
-    <style name="Theme.MyRecipesApp" parent="Base.Theme.MyRecipesApp" />
+    <style name="ScreenBackground"><item name="android:background">@color/MainLightBackground</item></style>
+    <style name="TextColorFont">
+        <item name="android:textColor">@color/MainText</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+    </style>
+
+    <style name="BottomBarNavigator" parent="Widget.Design.BottomNavigationView">
+        <item name="backgroundTint">@color/BottomBarLight</item>
+        <item name="itemIconTint">@color/selector_light</item>
+        <item name="itemTextColor">@color/selector_light</item>
+
+    </style>
+
+
 </resources>
