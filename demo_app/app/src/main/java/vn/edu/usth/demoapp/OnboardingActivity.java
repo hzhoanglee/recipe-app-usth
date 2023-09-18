@@ -4,61 +4,93 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import com.github.appintro.AppIntro;
+import com.github.appintro.AppIntroFragment;
+import com.github.appintro.AppIntroPageTransformerType;
 
-import com.ramotion.paperonboarding.PaperOnboardingFragment;
-import com.ramotion.paperonboarding.PaperOnboardingPage;
-import com.ramotion.paperonboarding.listeners.PaperOnboardingOnRightOutListener;
 
-import java.util.ArrayList;
-
-public class OnboardingActivity extends AppCompatActivity {
+public class OnboardingActivity extends AppIntro {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_onboarding);
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        final PaperOnboardingFragment paperOnboardingFragment = PaperOnboardingFragment.newInstance(getDataforOnboarding());
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 
-        paperOnboardingFragment.setOnRightOutListener(new PaperOnboardingOnRightOutListener() {
-            @Override
-            public void onRightOut() {
-                SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("isFirstRun", false);
-                editor.apply();
+        Color Color;
+        addSlide(AppIntroFragment.createInstance(getResources().getString(R.string.onboarding_title_1),
+                getResources().getString(R.string.onboarding_subtitle_1),
+                R.drawable.person_cooking1,
+                R.color.onboarding_1
+        ));
 
-                finish();
-                Intent intent = new Intent(OnboardingActivity.this, MainActivity.class);
-                startActivity(intent);
+        addSlide(AppIntroFragment.createInstance(getResources().getString(R.string.onboarding_title_2),
+                getResources().getString(R.string.onboarding_subtitle_2),
+                R.drawable.person_cooking2,
+                R.color.onboarding_2
+        ));
 
-            }
-        });
+        addSlide(AppIntroFragment.createInstance(getResources().getString(R.string.onboarding_title_3),
+                getResources().getString(R.string.onboarding_subtitle_3),
+                R.drawable.person_cooking3,
+                R.color.onboarding_3
+        ));
 
-        fragmentTransaction.add(R.id.activity_onboarding, paperOnboardingFragment);
 
-        fragmentTransaction.commit();
+        // Fade Transition
+        setTransformer(AppIntroPageTransformerType.Fade.INSTANCE);
+
+        // Show/hide status bar
+        showStatusBar(true);
+        //Enable the color "fade" animation between two slides (make sure the slide implements SlideBackgroundColorHolder)
+        setColorTransitionsEnabled(true);
+
+        //Prevent the back button from exiting the slides
+        setSystemBackButtonLocked(true);
+
+        //Activate wizard mode (Some aesthetic changes)
+        setWizardMode(false);
+
+        //Enable/disable page indicators
+        setIndicatorEnabled(false);
+
+        // next button
+        setSkipText("Skip");
+
+        setSkipButtonEnabled(true);
+
+
     }
 
-    private ArrayList<PaperOnboardingPage> getDataforOnboarding() {
+    @Override
+    protected void onSkipPressed(Fragment currentFragment) {
+        super.onSkipPressed(currentFragment);
+        SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isFirstRun", false);
+        editor.apply();
 
-        PaperOnboardingPage source = new PaperOnboardingPage(getResources().getString(R.string.onboarding_title_1), getResources().getString(R.string.onboarding_subtitle_1), Color.parseColor("#ffb174"),R.drawable.person_cooking1, R.drawable.ic_setting_recipes);
-        PaperOnboardingPage source1 = new PaperOnboardingPage(getResources().getString(R.string.onboarding_title_2), getResources().getString(R.string.onboarding_subtitle_2), Color.parseColor("#22eaaa"),R.drawable.person_cooking2, R.drawable.ic_setting_recipes);
-        PaperOnboardingPage source2 = new PaperOnboardingPage(getResources().getString(R.string.onboarding_title_3), getResources().getString(R.string.onboarding_subtitle_3), Color.parseColor("#ed9898"),R.drawable.person_cooking3, R.drawable.ic_setting_recipes);
+        finish();
+        Intent intent = new Intent(OnboardingActivity.this, MainActivity.class);
+        startActivity(intent);
 
-        ArrayList<PaperOnboardingPage> elements = new ArrayList<>();
-
-        elements.add(source);
-        elements.add(source1);
-        elements.add(source2);
-        return elements;
     }
+
+    @Override
+    protected void onDonePressed(Fragment currentFragment) {
+        super.onDonePressed(currentFragment);
+        SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isFirstRun", false);
+        editor.apply();
+
+        finish();
+        Intent intent = new Intent(OnboardingActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+
 }
