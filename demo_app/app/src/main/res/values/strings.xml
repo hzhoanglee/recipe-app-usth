@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Demo App</string>
+    <string name="app_name">Your Recipes</string>
 
     <!--bottom navigation title-->
     <string name="title_nav_home">Home</string>
