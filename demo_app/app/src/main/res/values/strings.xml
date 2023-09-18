@@ -6,4 +6,14 @@
     <string name="title_nav_recent">Explore</string>
     <string name="title_nav_category">Category</string>
     <string name="title_nav_favorite">Favorite</string>
+
+    <!--    OnBoarding-->
+    <string name="onboarding_title_1">Welcome to Your Recipes</string>
+    <string name="onboarding_title_2">Discover</string>
+    <string name="onboarding_title_3">Explore</string>
+    <string name="onboarding_subtitle_1">Your Recipes is a food recipe app that provides a variety of recipes from around the world</string>
+    <string name="onboarding_subtitle_2">Discover a variety of recipes from around the world</string>
+    <string name="onboarding_subtitle_3">Explore a variety of recipes from around the world</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
