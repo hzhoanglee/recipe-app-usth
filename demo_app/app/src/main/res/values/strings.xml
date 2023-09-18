@@ -16,4 +16,10 @@
     <string name="onboarding_subtitle_3">Explore a variety of recipes from around the world</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!--    Favourite Fragment-->
+    <string name="forgot_password_text">Forgot your password?</string>
+    <string name="login_button_text">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="username_hint">Username</string>
 </resources>
