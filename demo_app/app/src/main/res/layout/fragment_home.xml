@@ -6,17 +6,74 @@
     tools:context=".FragmentUI.HomeFragment"
     style="@style/ScreenBackground"
     android:padding="16dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:padding="16dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_nav_home"
-        style="@style/TextColorFont"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
-        android:id="@+id/textView"
-        />
+            <!--TODO: Add top fragment Carousel with viewpager2-->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:background="@drawable/layout_bg_test"
+                android:foregroundGravity="center"
+                android:foreground="@drawable/layout_bg_test"/>
+
+            <!--TODO: Add 3 scrollview oriented horizontally-->
+
+            <ScrollView
+                android:id="@+id/HscrollView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewPager2"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:padding="16dp"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"/>
+
+            <ScrollView
+                android:id="@+id/HscrollView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/HscrollView1"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:padding="16dp"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"/>
+
+            <ScrollView
+                android:id="@+id/HscrollView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/HscrollView2"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:padding="16dp"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"/>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
 
 
 </RelativeLayout>
