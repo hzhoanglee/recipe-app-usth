@@ -34,6 +34,16 @@
     <color name="TouchRippleDark">#384756</color>
     <color name="MainDarkBackground">#111c24</color>
     <color name="MainDarkText">#fefeff</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+
+    <!--color for onboarding-->
+    <color name="onboarding_1">#ffb174</color>
+    <color name="onboarding_2">#22eaaa</color>
+    <color name="onboarding_3">#ed9898</color>
 
 
 </resources>
