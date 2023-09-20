@@ -3,17 +3,19 @@
     <style name="Base.Theme.DemoApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor" >#75E61E62</item>
-
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor" >@color/TopBarLight</item>
         <item name="android:fontFamily">@font/custom_font</item>
-
         <!-- app bar color -->
         <item name="colorPrimary">@color/TopBarLight</item>
-
-        <item name="android:textColor">@color/TopBarLightText</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:textColorPrimary">@color/black</item>
+
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="actionOverflowButtonStyle">@style/menu_item_color_tint</item>
+
+<!--        toolbar icon color-->
+
+
 
     </style>
 
@@ -32,5 +34,16 @@
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
+    <style name="menu_item_color">
+        <item name="android:textColor">@color/white</item>
+        <item name="tint">@color/white</item>
+    </style>
+    <style name="menu_item_color_tint" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="tint">@color/white</item>
+    </style>
+
+<!--    change color of 3 dots button-->
+
+
 
 </resources>

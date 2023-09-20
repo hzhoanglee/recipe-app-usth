@@ -10,6 +10,7 @@
         <item name="android:textColor">@color/TopBarDarkText</item>
         <item name="android:textColorPrimary">@color/white</item>
 
+        <item name="android:actionMenuTextColor">@color/white</item>
 
     </style>
 

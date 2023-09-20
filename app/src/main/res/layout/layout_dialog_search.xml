@@ -15,6 +15,8 @@
         android:gravity="center"
         android:textColor = "@color/MainDarkText"
         android:background="@drawable/box_background_top_left"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
         />
 
     <LinearLayout

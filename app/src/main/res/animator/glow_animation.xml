@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="2000"
+    android:repeatCount="infinite"
+    android:repeatMode="reverse"
+    android:valueFrom="0"
+    android:valueTo="1" >
+
+    <objectAnimator
+        android:propertyName="waveValue"
+        android:valueType="floatType" >
+
+        <keyframe
+            android:fraction="0"
+            android:value="0" />
+
+        <keyframe
+            android:fraction="0.25"
+            android:value="1" />
+
+        <keyframe
+            android:fraction="0.5"
+            android:value="0" />
+
+        <keyframe
+            android:fraction="0.75"
+            android:value="1" />
+
+        <keyframe
+            android:fraction="1"
+            android:value="0" />
+    </objectAnimator>
+
+</animator>

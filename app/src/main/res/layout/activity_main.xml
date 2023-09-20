@@ -28,31 +28,44 @@
                 android:layout_centerInParent="true"
                 android:padding="8dp"
                 android:layout_marginStart="12dp"
+                android:textColor="@color/white"
                 />
 
-            <!-- ImageButton for Search -->
-            <ImageButton
-                android:id="@+id/imageButtonSearch"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:minHeight="?attr/actionBarSize"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_search"
-                android:background="?attr/selectableItemBackground"
-                android:layout_toLeftOf="@+id/imageButtonSettings"
-                android:layout_centerInParent="true"
-                android:padding="8dp"
-                />
+                app:titleTextColor="@android:color/transparent"
+                android:background="@android:color/transparent"
 
-            <!-- ImageButton for Settings -->
-            <ImageButton
-                android:id="@+id/imageButtonSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_settings"
-                android:background="?attr/selectableItemBackground"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:padding="8dp"
-                />
+
+                >
+            </androidx.appcompat.widget.Toolbar>
+
+<!--            &lt;!&ndash; ImageButton for Search &ndash;&gt;-->
+<!--            <ImageButton-->
+<!--                android:id="@+id/imageButtonSearch"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_search"-->
+<!--                android:background="?attr/selectableItemBackground"-->
+<!--                android:layout_toLeftOf="@+id/imageButtonSettings"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:padding="8dp"-->
+<!--                />-->
+
+<!--            &lt;!&ndash; ImageButton for Settings &ndash;&gt;-->
+<!--            <ImageButton-->
+<!--                android:id="@+id/imageButtonSettings"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_settings"-->
+<!--                android:background="?attr/selectableItemBackground"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:padding="8dp"-->
+<!--                />-->
 
         </RelativeLayout>
 
