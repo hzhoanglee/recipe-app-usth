@@ -7,6 +7,7 @@
     <string name="title_nav_category">Category</string>
     <string name="title_nav_favorite">Favorite</string>
 
+
     <!--    OnBoarding-->
     <string name="onboarding_title_1">Welcome to Your Recipes</string>
     <string name="onboarding_title_2">Discover</string>
@@ -18,8 +19,10 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <!--    Favourite Fragment-->
+    <string name="title_login">Log in to access your Favorite Recipes</string>
     <string name="forgot_password_text">Forgot your password?</string>
-    <string name="login_button_text">Login</string>
+    <string name="login_button_text">LOGIN</string>
     <string name="password_hint">Password</string>
     <string name="username_hint">Username</string>
+
 </resources>
