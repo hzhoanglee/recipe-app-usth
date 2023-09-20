@@ -39,27 +39,13 @@ public class OnboardingActivity extends AppIntro {
                 R.color.onboarding_3
         ));
 
-
-        // Fade Transition
         setTransformer(AppIntroPageTransformerType.Fade.INSTANCE);
-
-        // Show/hide status bar
         showStatusBar(true);
-        //Enable the color "fade" animation between two slides (make sure the slide implements SlideBackgroundColorHolder)
         setColorTransitionsEnabled(true);
-
-        //Prevent the back button from exiting the slides
         setSystemBackButtonLocked(true);
-
-        //Activate wizard mode (Some aesthetic changes)
         setWizardMode(false);
-
-        //Enable/disable page indicators
         setIndicatorEnabled(false);
-
-        // next button
         setSkipText("Skip");
-
         setSkipButtonEnabled(true);
 
 
