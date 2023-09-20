@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "vn.edu.usth.myrecipesapp"
+    namespace = "vn.edu.usth.demoapp"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "vn.edu.usth.myrecipesapp"
+        applicationId = "vn.edu.usth.demoapp"
         minSdk = 29
         targetSdk = 33
         versionCode = 1
@@ -47,10 +47,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.ramotion.paperonboarding:paper-onboarding:1.1.3")
     implementation("com.github.AppIntro:AppIntro:6.3.1")
-
     implementation("com.synnapps:carouselview:0.1.5")
 
     implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation("androidx.cardview:cardview:1.0.0")
-
 }
