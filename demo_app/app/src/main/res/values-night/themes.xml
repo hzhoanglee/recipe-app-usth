@@ -8,6 +8,8 @@
         <!-- app bar color -->
         <item name="colorPrimary">@color/TopBarDark</item>
         <item name="android:textColor">@color/TopBarDarkText</item>
+        <item name="android:textColorPrimary">@color/white</item>
+
 
     </style>
 
@@ -26,5 +28,7 @@
         <item name="fullscreenBackgroundColor">@color/light_blue_900</item>
         <item name="fullscreenTextColor">@color/light_blue_A400</item>
     </style>
+    <!--    textColorPrimary-->
+
 
 </resources>

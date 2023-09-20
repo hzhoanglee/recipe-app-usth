@@ -2,14 +2,26 @@ package vn.edu.usth.demoapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -73,8 +85,70 @@ public class MainActivity extends AppCompatActivity {
                     mBottomNavigationView.getMenu().getItem(position).setChecked(true);
                 }
             });
+
+            // Handle search button @+id/imageButtonSearch
+            findViewById(R.id.imageButtonSearch).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openSearchDialog(Gravity.CENTER);
+                }
+            });
+
+            findViewById(R.id.imageButtonSettings).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // set isLoggedIn to false
+                    SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("isLoggedIn", false);
+                    editor.apply();
+                    Toast.makeText(MainActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+            });
+
+        }
+    }
+
+    private void openSearchDialog(int gravity) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_dialog_search);
+
+        Window window = dialog.getWindow();
+        if(window == null) {
+            return;
         }
 
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+
+        dialog.setCancelable(Gravity.BOTTOM == gravity);
+
+        EditText editSeach = dialog.findViewById(R.id.editSearch);
+        Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
+        Button buttonSearch = dialog.findViewById(R.id.buttonSearch);
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Search: " + editSeach.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
 
     }
 }

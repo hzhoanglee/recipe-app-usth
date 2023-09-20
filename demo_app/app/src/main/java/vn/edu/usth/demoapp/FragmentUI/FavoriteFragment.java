@@ -2,6 +2,7 @@ package vn.edu.usth.demoapp.FragmentUI;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -45,6 +46,11 @@ public class FavoriteFragment extends Fragment {
                     editor.apply();
 
                     Toast.makeText(requireActivity(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+
+                    // reload app
+                    Intent intent = requireActivity().getIntent();
+                    requireActivity().finish();
+                    startActivity(intent);
 
                 }
             });

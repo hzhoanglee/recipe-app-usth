@@ -3,7 +3,7 @@
     <style name="Base.Theme.DemoApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor" >@color/TopBarLight</item>
+        <item name="android:statusBarColor" >#75E61E62</item>
 
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
@@ -13,6 +13,7 @@
         <item name="colorPrimary">@color/TopBarLight</item>
 
         <item name="android:textColor">@color/TopBarLightText</item>
+        <item name="android:textColorPrimary">@color/black</item>
 
     </style>
 
