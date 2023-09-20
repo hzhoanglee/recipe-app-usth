@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
     <!--app main color-->
     <color name="BottomBarLight">#eef5f7</color>
     <color name="BottomBarIconLightUnselected">#4c4953</color>
@@ -18,6 +19,7 @@
     <color name="TouchRippleLight">#fed4e0</color>
     <color name="MainLightBackground">#fefeff</color>
     <color name="MainText">#1d1a1f</color>
+    <color name="LoginButton">#5BAA3D79</color>
 
     <!--dark theme color-->
     <color name="BottomBarDark">#222d36</color>
@@ -39,6 +41,7 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+
 
     <!--color for onboarding-->
     <color name="onboarding_1">#ffb174</color>

@@ -5,17 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FragmentUI.FavoriteFragment"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/bg_login">
 
     <!-- Title -->
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_nav_favorite"
+        android:text="@string/title_login"
         android:textSize="30sp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
+        android:textStyle="bold"
+        android:drawableBottom="@drawable/ic_nav_favorite"
+        android:drawableTint="@color/white"
+
+
         />
 
     <!-- Username TextInputLayout -->
@@ -25,7 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewTitle"
         android:layout_marginTop="16dp"
-        app:hintEnabled="true">
+        app:hintEnabled="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextUsername"
@@ -33,6 +43,10 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint="@string/username_hint"
+            android:background="#30ffffff"
+            android:drawableLeft="@drawable/baseline_person_outline_24"
+            android:drawablePadding="20dp"
+
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -44,7 +58,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textInputLayoutUsername"
         android:layout_marginTop="16dp"
-        app:hintEnabled="true">
+        app:hintEnabled="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"
@@ -52,6 +68,9 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="@string/password_hint"
+            android:background="#30ffffff"
+            android:drawableLeft="@drawable/baseline_lock_open_24"
+            android:drawablePadding="20dp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,17 +80,22 @@
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login_button_text"
         android:layout_below="@id/textInputLayoutPassword"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/LoginButton"
+        android:letterSpacing=".3"
+        android:padding="10dp"
+        android:text="@string/login_button_text"
+        android:textSize="16dp"
+        android:textStyle="bold"
+
         />
 
-    <ProgressBar
-        android:id="@+id/determinateBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:progress="25"/>
 
 
     <!-- Forgot Password Link (optional) -->
@@ -82,7 +106,7 @@
         android:text="@string/forgot_password_text"
         android:layout_below="@id/buttonLogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+
         />
 
 </RelativeLayout>
