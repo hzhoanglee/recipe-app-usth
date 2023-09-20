@@ -33,6 +33,4 @@
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 
-    <style name="Theme.MyRecipesApp" parent="Base.Theme.MyRecipesApp" />
-    <style name="Favorite.CLickView" parent="Theme.MaterialComponents.DayNight.DarkActionBar"/>
 </resources>
