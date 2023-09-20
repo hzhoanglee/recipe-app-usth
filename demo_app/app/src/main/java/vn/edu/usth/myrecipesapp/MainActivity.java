@@ -1,12 +1,13 @@
 package vn.edu.usth.myrecipesapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 mViewPager2;
     private BottomNavigationView mBottomNavigationView;
     private TextView appTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 mBottomNavigationView.getMenu().getItem(position).setChecked(true);
             }
         });
+
+
 
     }
 }
