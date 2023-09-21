@@ -5,8 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityUI.SearchResultActivity">
+    <include
+        android:id="@+id/container_header_lyt"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        layout="@layout/appbar" />
 
     <LinearLayout
+        android:layout_marginTop="56dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView

@@ -53,14 +53,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(onboardingIntent);
         } else {
             appTitle = findViewById(R.id.textViewTitle);
-            appTitle.setText("Home");
+            appTitle.setText(getString(R.string.title_nav_home));
             mViewPager2 = findViewById(R.id.viewpager);
             mBottomNavigationView = findViewById(R.id.bottom_navigation);
 
             ViewPagerAdapter2 MyViewAdapter = new ViewPagerAdapter2(this);
             mViewPager2.setAdapter(MyViewAdapter);
             mViewPager2.setUserInputEnabled(false);
-            //change app title when swipe
             mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                 @Override
                 public void onPageSelected(int position) {
@@ -74,16 +73,16 @@ public class MainActivity extends AppCompatActivity {
                     int id = item.getItemId();
                     if (id == R.id.navigation_home) {
                         mViewPager2.setCurrentItem(0);
-                        appTitle.setText("Home");
+                        appTitle.setText(getString(R.string.title_nav_home));
                     } else if (id == R.id.navigation_recent) {
                         mViewPager2.setCurrentItem(1);
-                        appTitle.setText("Explore");
+                        appTitle.setText(getString(R.string.title_nav_recent));
                     } else if (id == R.id.navigation_category) {
                         mViewPager2.setCurrentItem(2);
-                        appTitle.setText("Category");
+                        appTitle.setText(getString(R.string.title_nav_category));
                     } else if (id == R.id.navigation_favorite) {
                         mViewPager2.setCurrentItem(3);
-                        appTitle.setText("Favorite");
+                        appTitle.setText(getString(R.string.title_nav_favorite));
                     }
                     return true;
                 }
@@ -95,30 +94,6 @@ public class MainActivity extends AppCompatActivity {
                     mBottomNavigationView.getMenu().getItem(position).setChecked(true);
                 }
             });
-
-
-            // Handle search button @+id/imageButtonSearch
-//            findViewById(R.id.action_search).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    openSearchDialog(Gravity.CENTER);
-//                }
-//            });
-//
-//            findViewById(R.id.imageButtonSettings).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    // set isLoggedIn to false
-//                    SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    editor.putBoolean("isLoggedIn", false);
-//                    editor.apply();
-//                    Toast.makeText(MainActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-//                    Intent intent = getIntent();
-//                    finish();
-//                    startActivity(intent);
-//                }
-//            });
 
         }
     }
@@ -232,7 +207,6 @@ public class MainActivity extends AppCompatActivity {
                 b.putString("search_param", editSearch.getText().toString());
                 intent.putExtras(b);
                 startActivity(intent);
-                finish();
             }
         });
 

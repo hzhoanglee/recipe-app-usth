@@ -27,6 +27,7 @@
         </ImageButton>
 
         <View
+            android:id="@+id/view_category"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#65000000"/>

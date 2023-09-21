@@ -2,6 +2,7 @@ package vn.edu.usth.demoapp.ActivityUI;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,13 +27,9 @@ public class SettingsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // handle SettingBackButton
-        findViewById(R.id.SettingBackButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        setTitle(getString(R.string.Settings));
+        handleBack();
+
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
@@ -40,5 +37,19 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
         }
+    }
+
+    private void setTitle(String title) {
+        TextView textView = findViewById(R.id.textViewTitle);
+        textView.setText(title);
+    }
+
+    private void handleBack() {
+        findViewById(R.id.SettingBackButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
