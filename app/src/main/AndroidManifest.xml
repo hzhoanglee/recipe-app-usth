@@ -13,17 +13,17 @@
         android:theme="@style/Base.Theme.DemoApp"
         tools:targetApi="31">
         <activity
-            android:name=".SearchResultActivity"
+            android:name=".ActivityUI.SearchResultActivity"
             android:exported="false" />
         <activity
-            android:name=".AboutActivity"
+            android:name=".ActivityUI.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".ActivityUI.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".OnboardingActivity"
+            android:name=".ActivityUI.OnboardingActivity"
             android:exported="true">
             <intent-filter>
 
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ActivityUI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

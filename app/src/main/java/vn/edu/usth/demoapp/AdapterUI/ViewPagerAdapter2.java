@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp;
+package vn.edu.usth.demoapp.AdapterUI;
 
 import android.widget.TextView;
 

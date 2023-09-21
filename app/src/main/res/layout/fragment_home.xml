@@ -21,11 +21,20 @@
             android:orientation="vertical"
             >
 
-            <androidx.viewpager.widget.ViewPager
+            <androidx.viewpager2.widget.ViewPager2
                 android:layout_width="match_parent"
-                android:layout_height="204dp"
-                android:id="@+id/viewPager_Carousel"
-                android:layout_alignParentTop="true"/>
+                android:layout_height="202dp"
+                android:id="@+id/viewPagerImageSlider"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                />
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/carousel_indicator"
+                android:layout_below="@id/viewPagerImageSlider"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_centerHorizontal="true"
+                app:ci_drawable="@drawable/carousel_custom_indicator"/>
 
 
 

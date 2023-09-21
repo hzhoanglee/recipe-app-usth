@@ -1,9 +1,11 @@
-package vn.edu.usth.demoapp;
+package vn.edu.usth.demoapp.ActivityUI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
+
+import vn.edu.usth.demoapp.R;
 
 public class SearchResultActivity extends AppCompatActivity {
 
