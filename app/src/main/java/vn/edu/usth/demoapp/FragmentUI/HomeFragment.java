@@ -3,26 +3,28 @@ package vn.edu.usth.demoapp.FragmentUI;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
-import android.widget.TextView;
+
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
 
 import vn.edu.usth.demoapp.R;
 
 public class HomeFragment extends Fragment {
 
     private View mView;
-    private Switch mSwitch;
 
+    List<String> imageList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_home, container, false);
-        //edit R.layout.toolbar.title_toolbar text to Home
 
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
         return mView;
     }
 }

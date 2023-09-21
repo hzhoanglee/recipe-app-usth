@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FragmentUI.HomeFragment"
@@ -20,60 +21,18 @@
             android:orientation="vertical"
             >
 
-            <!--TODO: Add top fragment Carousel with viewpager2-->
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2"
+            <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-                android:scrollbars="none"
-                android:background="@drawable/layout_bg_test"
-                android:foregroundGravity="center"
-                android:foreground="@drawable/layout_bg_test"/>
+                android:layout_height="204dp"
+                android:id="@+id/viewPager_Carousel"
+                android:layout_alignParentTop="true"/>
 
-            <!--TODO: Add 3 scrollview oriented horizontally-->
 
-            <ScrollView
-                android:id="@+id/HscrollView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/viewPager2"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:padding="16dp"
-                android:orientation="horizontal"
-                android:scrollbars="horizontal"/>
-
-            <ScrollView
-                android:id="@+id/HscrollView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/HscrollView1"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:padding="16dp"
-                android:orientation="horizontal"
-                android:scrollbars="horizontal"/>
-
-            <ScrollView
-                android:id="@+id/HscrollView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/HscrollView2"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:padding="16dp"
-                android:orientation="horizontal"
-                android:scrollbars="horizontal"/>
 
         </RelativeLayout>
 
 
     </ScrollView>
-
-
 
 
 </RelativeLayout>
