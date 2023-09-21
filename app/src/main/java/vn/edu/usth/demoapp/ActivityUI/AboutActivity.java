@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp;
+package vn.edu.usth.demoapp.ActivityUI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+
+import vn.edu.usth.demoapp.R;
 
 public class AboutActivity extends AppCompatActivity {
 

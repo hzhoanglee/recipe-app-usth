@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp.FragmentUI;
+package vn.edu.usth.demoapp.ObjectUI;
 
 public class Dish {
     private int resourceId;

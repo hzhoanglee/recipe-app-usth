@@ -1,16 +1,17 @@
-package vn.edu.usth.demoapp;
+package vn.edu.usth.demoapp.ActivityUI;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.github.appintro.AppIntro;
 import com.github.appintro.AppIntroFragment;
 import com.github.appintro.AppIntroPageTransformerType;
+
+import vn.edu.usth.demoapp.R;
 
 
 public class OnboardingActivity extends AppIntro {

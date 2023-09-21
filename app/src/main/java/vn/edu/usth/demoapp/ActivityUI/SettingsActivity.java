@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp;
+package vn.edu.usth.demoapp.ActivityUI;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.view.View;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+
+import vn.edu.usth.demoapp.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

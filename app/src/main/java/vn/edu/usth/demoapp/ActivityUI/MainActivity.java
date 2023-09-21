@@ -1,12 +1,10 @@
-package vn.edu.usth.demoapp;
+package vn.edu.usth.demoapp.ActivityUI;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,9 +13,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,7 +29,8 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import java.util.Objects;
+import vn.edu.usth.demoapp.R;
+import vn.edu.usth.demoapp.AdapterUI.ViewPagerAdapter2;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
             ViewPagerAdapter2 MyViewAdapter = new ViewPagerAdapter2(this);
             mViewPager2.setAdapter(MyViewAdapter);
+            mViewPager2.setUserInputEnabled(false);
             //change app title when swipe
             mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                 @Override

@@ -46,4 +46,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.ramotion.paperonboarding:paper-onboarding:1.1.3")
     implementation("com.github.AppIntro:AppIntro:6.3.1")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+    implementation("me.relex:circleindicator:2.1.6")
 }
