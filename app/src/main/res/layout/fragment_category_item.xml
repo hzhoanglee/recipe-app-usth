@@ -7,32 +7,41 @@
     tools:context=".FragmentUI.CategoryFragment"
     app:cardCornerRadius="8dp"
     android:padding="16dp"
-    android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="5dp"
-        android:padding="10dp">
+        >
 
-        <ImageView
+        <ImageButton
             android:id="@+id/img_category"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/person_cooking1">
+            android:src="@drawable/breakfast"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent"
+            >
 
-        </ImageView>
+        </ImageButton>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#65000000"/>
 
         <TextView
             android:id="@+id/name_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="appertizer"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Dish"
             android:layout_alignParentBottom="true"
-            android:textColor="@color/black">
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/white">
 
         </TextView>
 

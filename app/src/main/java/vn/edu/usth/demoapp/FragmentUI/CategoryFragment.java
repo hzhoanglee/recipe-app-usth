@@ -9,43 +9,51 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.edu.usth.demoapp.AdapterUI.DishAdapter;
-import vn.edu.usth.demoapp.ObjectUI.Dish;
+import vn.edu.usth.demoapp.AdapterUI.CategoryAdapter;
+import vn.edu.usth.demoapp.ObjectUI.Category;
 import vn.edu.usth.demoapp.R;
 
 public class CategoryFragment extends Fragment {
-    private RecyclerView rcvDish;
-    private DishAdapter dishAdapter;
+    private RecyclerView rcvCategory;
+    private CategoryAdapter categoryAdapter;
     private View mView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_category, container, false);
 
-        rcvDish = mView.findViewById(R.id.rcv_dish);
-        //dishAdapter = new DishAdapter(this);
-        dishAdapter = new DishAdapter(requireContext());
+        rcvCategory = mView.findViewById(R.id.rcv_category);
+        //categoryAdapter = new CategoryAdapter(this);
+        categoryAdapter = new CategoryAdapter(requireContext());
 
         //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false);
-        rcvDish.setLayoutManager(linearLayoutManager);
+        rcvCategory.setLayoutManager(linearLayoutManager);
+        List <Category> list = getListCategory();
 
-        dishAdapter.setData(getListDish());
-        rcvDish.setAdapter(dishAdapter);
+        categoryAdapter.setData(list);
+        rcvCategory.setAdapter(categoryAdapter);
+
         return mView;
+
     }
-    private List<Dish> getListDish(){
-        List<Dish> list = new ArrayList<>();
-        list.add(new Dish(R.drawable.person_cooking1, "Appetizers"));
-        list.add(new Dish(R.drawable.person_cooking2, "Breakfast"));
-        list.add(new Dish(R.drawable.person_cooking3, "Min dish"));
-        list.add(new Dish(R.drawable.person_cooking4, "Side dish"));
-        list.add(new Dish(R.drawable.person_cooking1, "Desserts"));
-        list.add(new Dish(R.drawable.person_cooking2, "Drinks"));
+
+
+    private List<Category> getListCategory(){
+        List<Category> list = new ArrayList<>();
+        list.add(new Category(R.drawable.appetizers, "Appetizers"));
+        list.add(new Category(R.drawable.breakfast, "Breakfast"));
+        list.add(new Category(R.drawable.main_dish, "Main dish"));
+        list.add(new Category(R.drawable.side_dish, "Side dish"));
+        list.add(new Category(R.drawable.desserts, "Desserts"));
+        list.add(new Category(R.drawable.drinks, "Drinks"));
 
         return list;
     }
