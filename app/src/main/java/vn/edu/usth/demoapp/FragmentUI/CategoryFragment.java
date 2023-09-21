@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import vn.edu.usth.demoapp.AdapterUI.DishAdapter;
+import vn.edu.usth.demoapp.ObjectUI.Dish;
 import vn.edu.usth.demoapp.R;
 
 public class CategoryFragment extends Fragment {

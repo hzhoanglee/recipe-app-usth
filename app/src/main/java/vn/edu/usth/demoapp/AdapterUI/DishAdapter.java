@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp.FragmentUI;
+package vn.edu.usth.demoapp.AdapterUI;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import vn.edu.usth.demoapp.ObjectUI.Dish;
 import vn.edu.usth.demoapp.R;
 
 public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder> {
