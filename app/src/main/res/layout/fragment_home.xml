@@ -13,7 +13,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:padding="16dp"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,6 +35,35 @@
                 android:layout_centerHorizontal="true"
                 app:ci_drawable="@drawable/carousel_custom_indicator"/>
 
+            <LinearLayout
+                android:id="@+id/bar_nav_category"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/carousel_indicator"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_nav_category"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    style="@style/TextColorFont"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    />
+
+                <!-- img button no stretch -->
+                <ImageButton
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    style="@style/ImageButtonStyle"
+                    />
+
+            </LinearLayout>
 
 
         </RelativeLayout>

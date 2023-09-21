@@ -29,7 +29,10 @@
         <item name="fullscreenBackgroundColor">@color/light_blue_900</item>
         <item name="fullscreenTextColor">@color/light_blue_A400</item>
     </style>
-    <!--    textColorPrimary-->
 
+    <style name="ImageButtonStyle" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">?attr/selectableItemBackground</item>"
+        <item name="android:src">@drawable/ic_arrow_right_dark</item>
+    </style>
 
 </resources>

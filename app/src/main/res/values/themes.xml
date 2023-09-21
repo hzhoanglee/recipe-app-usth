@@ -42,8 +42,10 @@
         <item name="tint">@color/white</item>
     </style>
 
-<!--    change color of 3 dots button-->
-
+    <style name="ImageButtonStyle" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">?attr/selectableItemBackground</item>"
+        <item name="android:src">@drawable/ic_arrow_right</item>
+    </style>
 
 
 </resources>
