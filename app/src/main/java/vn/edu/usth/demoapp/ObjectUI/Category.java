@@ -1,10 +1,10 @@
 package vn.edu.usth.demoapp.ObjectUI;
 
-public class Dish {
+public class Category {
     private int resourceId;
     private String name;
 
-    public Dish (int resourceId, String name){
+    public Category (int resourceId, String name){
         this.resourceId = resourceId;
         this.name = name;
     }
