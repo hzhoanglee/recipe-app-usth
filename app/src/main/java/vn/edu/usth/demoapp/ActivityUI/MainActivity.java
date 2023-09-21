@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
         windowAttributes.gravity = gravity;
         window.setAttributes(windowAttributes);
 
-        dialog.setCancelable(Gravity.BOTTOM == gravity);
+        dialog.setCancelable(Gravity.CENTER == gravity);
 
         EditText editSearch = dialog.findViewById(R.id.editSearch);
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);

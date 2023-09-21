@@ -102,7 +102,7 @@ public class FavoriteFragment extends Fragment {
         windowAttributes.gravity = gravity;
         window.setAttributes(windowAttributes);
 
-        dialog.setCancelable(Gravity.BOTTOM == gravity);
+        dialog.setCancelable(Gravity.CENTER == gravity);
 
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
         Button buttonSearch = dialog.findViewById(R.id.buttonSearch);
