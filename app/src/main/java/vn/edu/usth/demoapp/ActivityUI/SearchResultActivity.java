@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import java.util.Objects;
 
+import vn.edu.usth.demoapp.FragmentUI.ExploreFragment;
 import vn.edu.usth.demoapp.R;
 
 public class SearchResultActivity extends AppCompatActivity {
@@ -36,11 +37,15 @@ public class SearchResultActivity extends AppCompatActivity {
             setTitle(title + ": " + search_param);
         }
 
-        // update query_text
+
         TextView query_text = findViewById(R.id.query_text);
         query_text.setText(value);
 
         handleBack();
+
+        // load explore fragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new ExploreFragment()).commit();
 
     }
 

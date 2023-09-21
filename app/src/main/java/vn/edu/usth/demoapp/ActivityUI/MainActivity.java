@@ -116,7 +116,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
         if (item.getItemId() == R.id.action_search) {
-            openSearchDialog(Gravity.CENTER);
+            openSearchDialog(Gravity.CENTER, "search");
+            return true;
+        }
+        if (item.getItemId() == R.id.action_request) {
+            openSearchDialog(Gravity.CENTER, "request_recipe");
             return true;
         }
         if (item.getItemId() == R.id.action_settings) {
@@ -168,11 +172,17 @@ public class MainActivity extends AppCompatActivity {
         }, 2000);
     }
 
-    private void openSearchDialog(int gravity) {
+    private void openSearchDialog(int gravity, String type) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.layout_dialog_search);
-
+        if(type.equals("search"))
+            dialog.setContentView(R.layout.layout_dialog_search);
+        else if(type.equals("request_recipe")) {
+            dialog.setContentView(R.layout.layout_dialog_request);
+        } else {
+            Toast.makeText(MainActivity.this, "Error: Invalid dialog type", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        }
         Window window = dialog.getWindow();
         if(window == null) {
             return;
@@ -197,18 +207,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // get search param from editSearch
-                Toast.makeText(MainActivity.this, "Search: " + editSearch.getText().toString(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
-                Bundle b = new Bundle();
-                b.putString("search_param", editSearch.getText().toString());
-                intent.putExtras(b);
-                startActivity(intent);
-            }
-        });
+        if(type.equals("search")) {
+            // handle buttons for search dialog
+            buttonSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // get search param from editSearch
+                    Toast.makeText(MainActivity.this, "Search: " + editSearch.getText().toString(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("search_param", editSearch.getText().toString());
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
+            });
+        } else if (type.equals("request_recipe")) {
+            // handle buttons for request recipe dialog
+            buttonSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Thank you for requesting: " + editSearch.getText().toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(MainActivity.this, "Error: Invalid dialog type", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        }
 
         dialog.show();
 
