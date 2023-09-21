@@ -84,13 +84,19 @@
 
             </HorizontalScrollView>
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/scroll_category"
+                android:text="Ad Area"
+                android:background="@color/light_blue_600"
+                android:id="@+id/ad_area"/>
 
             <LinearLayout
                 android:id="@+id/bar_nav_recent"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/scroll_category"
+                android:layout_below="@id/ad_area"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
