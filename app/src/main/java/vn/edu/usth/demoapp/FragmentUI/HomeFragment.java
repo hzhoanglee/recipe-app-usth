@@ -43,9 +43,9 @@ public class HomeFragment extends Fragment {
 
     private List<Photo> getListPhoto(){
         List<Photo> list = new ArrayList<>();
-        list.add(new Photo(R.drawable.place_holder, R.string.title_nav_home));
-        list.add(new Photo(R.drawable.place_holder, R.string.title_nav_home));
-        list.add(new Photo(R.drawable.place_holder, R.string.title_nav_home));
+        list.add(new Photo(R.drawable.place_holder, "Steak1"));
+        list.add(new Photo(R.drawable.place_holder, "Steak2"));
+        list.add(new Photo(R.drawable.place_holder, "Steak3"));
         return list;
     }
 }

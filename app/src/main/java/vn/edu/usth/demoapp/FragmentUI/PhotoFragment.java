@@ -30,7 +30,7 @@ public class PhotoFragment extends Fragment {
         ImageView imgPhoto = mView.findViewById(R.id.imgPhoto);
         imgPhoto.setImageResource(photo.getImgResourceID());
         TextView imgText = mView.findViewById(R.id.imgText);
-        imgText.setText(photo.getTextResourceID());
+        imgText.setText(photo.getTextResource());
 
         return mView;
     }
