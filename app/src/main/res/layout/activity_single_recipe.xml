@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <!-- appbar with back button on the left and title next to it -->
+    <!-- on the right there is from left to right: font size button, favorite button, and share button-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?attr/colorPrimary"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageButton
+                android:id="@+id/buttonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                style="@style/ImageButtonStyle_Left"
+                />
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                style="@style/TitleColorFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                android:layout_centerVertical="true"
+                android:textSize="20sp"
+                android:paddingTop="4dp"
+                android:layout_toRightOf="@id/buttonBack"
+                />
+
+            <ImageButton
+                android:id="@+id/buttonFontSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_menu_font_size"
+                android:layout_centerVertical="true"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:layout_toLeftOf="@id/buttonFavorite"
+                />
+
+            <ImageButton
+                android:id="@+id/buttonFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/buttonShare"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_fav_outline"
+                android:layout_centerVertical="true"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:paddingStart="10dp"
+                />
+
+            <ImageButton
+                android:id="@+id/buttonShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_share"
+                android:layout_centerVertical="true"
+                android:paddingBottom="4dp"
+                android:paddingEnd="6dp"
+                android:paddingTop="4dp"
+                android:paddingStart="10dp"
+                />
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imageViewPhotoDetail"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="15dp"
+                android:layout_height="203dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/place_holder" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Recipe Name -->
+            <TextView
+                android:id="@+id/RecipeNameViewPhotoDetail"
+                android:layout_below="@+id/imageViewPhotoDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextColorFont"
+                android:text="@string/placeholder"
+                />
+
+            <!-- View count -->
+            <TextView
+                android:id="@+id/ViewCountViewPhotoDetail"
+                android:layout_below="@+id/RecipeNameViewPhotoDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextColorFontSmallest"
+                android:text="@string/title_nav_favorite"
+                />
+
+            <!-- Horizontal Line -->
+            <View
+                android:id="@+id/ViewLine"
+                android:layout_below="@+id/ViewCountViewPhotoDetail"
+                android:layout_width="match_parent"
+                style="@style/HLine"
+                />
+
+            <!-- Ingredients -->
+            <TextView
+                android:id="@+id/IngredientsViewPhotoDetail"
+                android:layout_below="@+id/ViewLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextColorFontSmall"
+                android:text="@string/title_nav_favorite"
+                />
+
+            <!-- Horizontal Line -->
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
+
+
+
+
+
+
+
+
