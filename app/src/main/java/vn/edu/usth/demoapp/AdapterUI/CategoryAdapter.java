@@ -75,7 +75,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return 0;
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class CategoryViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgCategory;
         private TextView nameCategory;
         private View imageButton;
@@ -87,10 +87,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             imageButton = itemView.findViewById(R.id.view_category);
         }
 
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(v.getContext(), "Gay = " + getLayoutPosition(), Toast.LENGTH_SHORT).show();
-        }
+
     }
 
 }

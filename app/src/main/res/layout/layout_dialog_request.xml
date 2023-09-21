@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Search"
+        android:text="@string/Request_Recipe"
         android:textSize="24sp"
         android:gravity="center"
         android:textColor = "@color/MainDarkText"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="@string/Search"
+            android:text="@string/Request_Recipe"
             android:textColor="@color/MainText"
             />
 
@@ -36,7 +36,7 @@
             android:id="@+id/editSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Search"
+            android:hint="Input name of recipe that you want"
             android:textColor="@color/MainText"
             />
         <LinearLayout
@@ -58,7 +58,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/Search"
+                android:text="@string/Request"
                 android:id="@+id/buttonSearch"
                 android:layout_weight="1"
                 android:layout_marginStart="7dp"

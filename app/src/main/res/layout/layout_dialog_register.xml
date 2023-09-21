@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Search"
+        android:text="@string/register_text"
         android:textSize="24sp"
         android:gravity="center"
         android:textColor = "@color/MainDarkText"
@@ -24,21 +24,58 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="@string/Search"
+            android:text="@string/username_hint"
             android:textColor="@color/MainText"
             />
 
         <EditText
-            android:id="@+id/editSearch"
+            android:id="@+id/edit_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Search"
+            android:hint="@string/username_hint"
             android:textColor="@color/MainText"
             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/password_hint"
+            android:textColor="@color/MainText"
+            />
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_hint"
+            android:textColor="@color/MainText"
+            android:inputType="textPassword"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/re_password_hint"
+            android:textColor="@color/MainText"
+            />
+
+        <EditText
+            android:id="@+id/edit_re_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/re_password_hint"
+            android:textColor="@color/MainText"
+            android:inputType="textPassword"
+            />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +95,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/Search"
+                android:text="@string/register_text"
                 android:id="@+id/buttonSearch"
                 android:layout_weight="1"
                 android:layout_marginStart="7dp"

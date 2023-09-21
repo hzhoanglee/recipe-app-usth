@@ -16,6 +16,8 @@
     <string name="Settings">Settings</string>
     <string name="About">About</string>
     <string name="Exit">Exit App</string>
+    <string name="Request_Recipe">Request Recipe</string>
+    <string name="Request">Request</string>
 
 
     <!--    OnBoarding-->
@@ -31,8 +33,11 @@
     <!--    Favourite Fragment-->
     <string name="title_login">Log in to access your Favorite Recipes</string>
     <string name="forgot_password_text">Forgot your password?</string>
+    <string name="create_account_text">Don\'t have an account? Create one</string>
     <string name="login_button_text">LOGIN</string>
+    <string name="register_text">Register</string>
     <string name="password_hint">Password</string>
+    <string name="re_password_hint">Re-enter your password</string>
     <string name="username_hint">Username</string>
     <string name="title_activity_settings">SettingsActivity</string>
 

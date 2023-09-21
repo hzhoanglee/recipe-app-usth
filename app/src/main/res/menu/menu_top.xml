@@ -9,6 +9,13 @@
         android:iconTint="@color/black"/>
 
     <item
+        android:id="@+id/action_request"
+        android:title="@string/Request"
+        android:icon="@drawable/ic_post_add_white"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:iconTint="@color/black"/>
+
+    <item
         android:id="@+id/action_settings"
         android:title="@string/Settings"
         app:showAsAction="never" />
