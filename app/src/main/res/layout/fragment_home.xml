@@ -35,6 +35,9 @@
                 android:layout_centerHorizontal="true"
                 app:ci_drawable="@drawable/carousel_custom_indicator"/>
 
+
+
+
             <LinearLayout
                 android:id="@+id/bar_nav_category"
                 android:layout_width="match_parent"
@@ -64,6 +67,137 @@
                     />
 
             </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/scroll_category"
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                android:layout_below="@id/bar_nav_category"
+                android:scrollbars="none"
+                android:overScrollMode="never">
+
+                <LinearLayout
+                    android:id="@+id/scroll_category_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+
+
+
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/bar_nav_recent"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/scroll_category"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_nav_recent2"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    style="@style/TextColorFont"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    />
+
+                <!-- img button no stretch -->
+                <ImageButton
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    style="@style/ImageButtonStyle"
+                    />
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/scroll_recent"
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                android:layout_below="@id/bar_nav_category"
+                android:scrollbars="none"
+                android:overScrollMode="never">
+
+                <LinearLayout
+                    android:id="@+id/scroll_recent_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+
+
+
+
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/bar_nav_video"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/scroll_recent"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_nav_recent2"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    style="@style/TextColorFont"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    />
+
+                <!-- img button no stretch -->
+                <ImageButton
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    style="@style/ImageButtonStyle"
+                    />
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/scroll_video"
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                android:layout_below="@id/bar_nav_category"
+                android:scrollbars="none"
+                android:overScrollMode="never">
+
+                <LinearLayout
+                    android:id="@+id/scroll_video_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
 
 
         </RelativeLayout>

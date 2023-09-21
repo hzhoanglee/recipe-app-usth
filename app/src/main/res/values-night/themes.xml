@@ -20,6 +20,35 @@
         <item name="android:fontFamily">@font/custom_font</item>
     </style>
 
+    <style name="TextColorFontSmall">
+        <item name="android:textColor">@color/MainDarkText</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextColorFontSmaller">
+        <item name="android:textColor">@color/MainDarkText</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextColorFontSmallest">
+        <item name="android:textColor">@color/MainDarkText</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TextColorFontLarge">
+        <item name="android:textColor">@color/MainDarkText</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TitleColorFont">
+        <item name="android:textColor">@color/TopBarDarkText</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+    </style>
+
     <style name="BottomBarNavigator" parent="Widget.Material3.BottomNavigationView">
         <item name="backgroundTint">@color/BottomBarDark</item>
         <item name="itemIconTint">@color/selector_dark</item>
@@ -33,6 +62,18 @@
     <style name="ImageButtonStyle" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">?attr/selectableItemBackground</item>"
         <item name="android:src">@drawable/ic_arrow_right_dark</item>
+    </style>
+
+    <style name="ImageButtonStyle_Left" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">?attr/selectableItemBackground</item>"
+        <item name="android:src">@drawable/ic_arrow_left_dark</item>
+    </style>
+
+    <!-- HLine -->
+    <style name="HLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/MainDarkText</item>
     </style>
 
 </resources>
