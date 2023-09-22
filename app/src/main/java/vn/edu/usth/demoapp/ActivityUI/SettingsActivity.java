@@ -58,18 +58,6 @@ public class SettingsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        // TODO: Handle Back Button
-        // on android back action
-        findViewById(R.id.settings).setOnKeyListener((v, keyCode, event) -> {
-            if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
-                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-                return true;
-            }
-            return false;
-        });
 
     }
 }
