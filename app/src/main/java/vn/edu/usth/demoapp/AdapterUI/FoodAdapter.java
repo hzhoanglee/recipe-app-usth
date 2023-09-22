@@ -2,6 +2,8 @@ package vn.edu.usth.demoapp.AdapterUI;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import vn.edu.usth.demoapp.ActivityUI.SearchResultActivity;
+import vn.edu.usth.demoapp.ActivityUI.SingleFoodActivity;
 import vn.edu.usth.demoapp.ObjectUI.Food;
 import vn.edu.usth.demoapp.R;
 
@@ -55,7 +59,15 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "You clicked " + food.getName(), Toast.LENGTH_SHORT).show();
+                Bundle b = new Bundle();
+                b.putString("food_name", food.getName());
+                b.putInt("food_img", food.getResourceImage());
+                b.putFloat("food_rate", food.getStar());
+                b.putString("food_description", food.getDescription());
+                b.putString("type", "recipe_item");
+                Intent intent = new Intent(mContext, SingleFoodActivity.class);
+                intent.putExtras(b);
+                mContext.startActivity(intent);
             }
         });
 
