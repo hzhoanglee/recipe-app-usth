@@ -1,45 +1,14 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory app:title="@string/messages_header">
+    <!--    Change sharedPreference of isLoggedIn-->
+    <PreferenceCategory app:title="@string/allow_ads">
 
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
+        <SwitchPreferenceCompat
+            android:id="@+id/allow_ads_switch"
+            app:key="allow_ads"
+            app:title="@string/allow_ads"
             app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/sync_header">
-
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="Login">
-
-
-        <SwitchPreferenceCompat
-            app:key="isLoggedin"
-            app:title="Logged in" />
-
-
-    </PreferenceCategory>
 
 </PreferenceScreen>
