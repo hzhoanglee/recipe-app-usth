@@ -21,8 +21,10 @@ import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
 import vn.edu.usth.demoapp.AdapterUI.FoodAdapter;
+import vn.edu.usth.demoapp.AdapterUI.HomeCategoryAdapter;
 import vn.edu.usth.demoapp.AdapterUI.HomeFoodAdapter;
 import vn.edu.usth.demoapp.AdapterUI.PhotoAdapter;
+import vn.edu.usth.demoapp.ObjectUI.Category;
 import vn.edu.usth.demoapp.ObjectUI.Food;
 import vn.edu.usth.demoapp.ObjectUI.Photo;
 import vn.edu.usth.demoapp.R;
@@ -33,6 +35,7 @@ public class HomeFragment extends Fragment {
     private ViewPager2 CarouselViewPager;
     private CircleIndicator3 CarouselIndicator;
     private HomeFoodAdapter foodAdapter;
+    private HomeCategoryAdapter categoryAdapter;
 
     private RecyclerView recyclerViewCategory;
     private RecyclerView recyclerViewRecent;
@@ -61,6 +64,12 @@ public class HomeFragment extends Fragment {
         foodAdapter.setData(getListRecentFood());
         recyclerViewRecent.setAdapter(foodAdapter);
 
+        // set category food(horizontal scroll)
+        categoryAdapter = new HomeCategoryAdapter(requireContext());
+        recyclerViewCategory.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        categoryAdapter.setData(getListTypeFood());
+        recyclerViewCategory.setAdapter(categoryAdapter);
+
         handleAds();
 
         return mView;
@@ -87,14 +96,14 @@ public class HomeFragment extends Fragment {
 
 
 
-    private List<Food> getListTypeFood(){
-        List<Food> list = new ArrayList<>();
-        list.add(new Food(R.drawable.appetizers, "Appetizers", 0, "This is appetizers recipe that you can make at home"));
-        list.add(new Food(R.drawable.breakfast, "Breakfast", 0, "This is breakfast recipe that you can make at home"));
-        list.add(new Food(R.drawable.main_dish, "Main dish", 0, "This is main dish recipe that you can make at home"));
-        list.add(new Food(R.drawable.side_dish, "Side dish", 0, "This is side dish recipe that you can make at home"));
-        list.add(new Food(R.drawable.desserts, "Desserts", 0, "This is desserts recipe that you can make at home"));
-        list.add(new Food(R.drawable.drinks, "Drinks", 0, "This is drinks recipe that you can make at home"));
+    private List<Category> getListTypeFood(){
+        List<Category> list = new ArrayList<>();
+        list.add(new Category(R.drawable.appetizers, "Appetizers"));
+        list.add(new Category(R.drawable.breakfast, "Breakfast"));
+        list.add(new Category(R.drawable.main_dish, "Main dish"));
+        list.add(new Category(R.drawable.side_dish, "Side dish"));
+        list.add(new Category(R.drawable.desserts, "Desserts"));
+        list.add(new Category(R.drawable.drinks, "Drinks"));
         return list;
     }
 
