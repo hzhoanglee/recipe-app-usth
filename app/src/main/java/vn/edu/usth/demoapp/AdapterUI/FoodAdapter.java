@@ -59,10 +59,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             }
         });
 
-        holder.ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            Toast.makeText(mContext, "You rated " + food.getName() + " " + rating + " stars", Toast.LENGTH_SHORT).show();
-        });
-
     }
 
     @Override
