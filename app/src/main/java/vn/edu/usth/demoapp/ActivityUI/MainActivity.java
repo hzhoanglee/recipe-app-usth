@@ -3,6 +3,7 @@ package vn.edu.usth.demoapp.ActivityUI;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Dialog;
@@ -46,9 +47,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
-        boolean isFirstRun = sharedPreferences.getBoolean("isFirstRun", true);
-        if (isFirstRun) {
+
+        if (checkFirstRun()) {
             Intent onboardingIntent = new Intent(this, OnboardingActivity.class);
             startActivity(onboardingIntent);
         } else {
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                     mBottomNavigationView.getMenu().getItem(position).setChecked(true);
                 }
             });
-
         }
     }
 
@@ -237,6 +236,11 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.show();
 
+    }
+
+    private boolean checkFirstRun() {
+        SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isFirstRun", true);
     }
 
 }

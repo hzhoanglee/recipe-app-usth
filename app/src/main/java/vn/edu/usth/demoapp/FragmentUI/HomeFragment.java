@@ -1,8 +1,10 @@
 package vn.edu.usth.demoapp.FragmentUI;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -10,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.LinearLayout;
 
 
@@ -58,6 +61,8 @@ public class HomeFragment extends Fragment {
         foodAdapter.setData(getListRecentFood());
         recyclerViewRecent.setAdapter(foodAdapter);
 
+        handleAds();
+
         return mView;
     }
 
@@ -68,6 +73,19 @@ public class HomeFragment extends Fragment {
         list.add(new Photo(R.drawable.place_holder, "Steak3"));
         return list;
     }
+
+    private void handleAds() {
+        SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        boolean allow_ads = sharedPreferences1.getBoolean("allow_ads", true);
+        if(!allow_ads) {
+            TextView ads = mView.findViewById(R.id.ad_area);
+            if(ads != null) {
+                ads.setVisibility(View.GONE);
+            }
+        }
+    }
+
+
 
     private List<Food> getListTypeFood(){
         List<Food> list = new ArrayList<>();
