@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <!-- appbar with back button on the left and title next to it -->
+    <!-- on the right there is from left to right: font size button, favorite button, and share button-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?attr/colorPrimary"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageButton
+                android:id="@+id/buttonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                style="@style/ImageButtonStyle_Left"
+                />
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                style="@style/TitleColorFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                android:layout_centerVertical="true"
+                android:textSize="20sp"
+                android:paddingTop="4dp"
+                android:layout_toRightOf="@id/buttonBack"
+                />
+
+            <ImageButton
+                android:id="@+id/buttonFontSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_menu_font_size"
+                android:layout_centerVertical="true"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:layout_toLeftOf="@id/buttonFavorite"
+                />
+
+            <ImageButton
+                android:id="@+id/buttonFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/buttonShare"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_fav_outline"
+                android:layout_centerVertical="true"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:paddingStart="10dp"
+                />
+
+            <ImageButton
+                android:id="@+id/buttonShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_share"
+                android:layout_centerVertical="true"
+                android:paddingBottom="4dp"
+                android:paddingEnd="6dp"
+                android:paddingTop="4dp"
+                android:paddingStart="10dp"
+                />
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imageViewPhotoDetail"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="15dp"
+                android:layout_height="203dp">
+                <ImageView
+                    android:id="@+id/RecipeImageViewDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/place_holder" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Recipe Name -->
+            <TextView
+                android:id="@+id/RecipeNameViewPhotoDetail"
+                android:layout_below="@+id/imageViewPhotoDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                />
+
+            <RatingBar
+                android:id="@+id/ViewRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RecipeNameViewPhotoDetail"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="-54dp"
+                android:layout_marginTop="-15dp"
+                android:layout_marginBottom="-15dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="4.5"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar"/>
+
+            <!-- View count -->
+            <TextView
+                android:id="@+id/ViewCountViewPhotoDetail"
+                android:layout_below="@+id/ViewRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                />
+
+
+            <!-- Ingredients -->
+            <TextView
+                android:id="@+id/DescriptionViewPhotoDetail"
+                android:layout_below="@+id/ViewCountViewPhotoDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextColorFontSmall"
+                android:text="@string/title_nav_favorite"
+                />
+
+
+            <!-- Horizontal Line -->
+            <View
+                android:id="@+id/ViewLine"
+                android:layout_below="@+id/DescriptionViewPhotoDetail"
+                android:layout_width="match_parent"
+                style="@style/HLine"
+                />
+
+            <!-- Ingredients -->
+            <TextView
+                android:id="@+id/IngredientsViewPhotoTitle"
+                android:layout_below="@+id/ViewLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextColorFontSmall"
+                android:text="@string/ingredients"
+                android:textSize="24sp"
+                />
+
+            <TextView
+                android:id="@+id/IngredientsViewPhotoContent"
+                android:layout_below="@+id/IngredientsViewPhotoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextColorFontSmall"
+                android:text="
+- 320g pack chicken mini breast fillets\n
+- 2½ tbsp light soy sauce\n
+- vegetable oil, for frying\n
+- 1 red pepper, deseeded and thinly sliced\n
+- 1 green pepper, deseeded and thinly sliced\n
+- 3 tbsp cornflour\n
+- 3 tbsp sweet chilli sauce\n
+- 1 tbsp garlic and ginger paste\n
+- 1 tbsp sesame oil\n
+- 2 spring onions, trimmed and finely sliced"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/MethodViewPhotoTitle"
+                android:layout_below="@+id/IngredientsViewPhotoContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextColorFontSmall"
+                android:text="@string/method"
+                android:textSize="24sp"
+                />
+
+            <TextView
+                android:id="@+id/MethodViewPhotoContent"
+                android:layout_below="@+id/MethodViewPhotoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextColorFontSmall"
+                android:text="STEP 1\n
+Slice the chicken into thin strips. Pour over 2 tbsp of the soy and marinate in the fridge, covered, for 1 hr.\n
+
+STEP 2\n
+Meanwhile, heat 1 tbsp of the oil in a wok or deep frying pan over a medium heat and cook the peppers for 3-4 mins until just beginning to soften. Remove with a slotted spoon and set aside.\n
+
+STEP 3\n
+Spread the cornflour out in a shallow bowl. Season, then add the marinated chicken strips and toss to coat well.\n
+
+STEP 4\n
+Fill a wok or deep frying pan with the oil so it’s about ½cm deep, then heat to medium-high. Carefully add the chicken in batches, cooking for 3-4 mins, using tongs to turn regularly until golden and crispy. Remove with a slotted spoon and place on a plate lined with kitchen paper to drain.\n
+
+STEP 5\n
+Mix together the remaining soy, sweet chilli, garlic paste and sesame oil in a large bowl. Add the cooked peppers, crispy chicken and toss together until coated all over and sticky. Serve sprinkled with the spring onions."
+                android:textSize="16sp"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
+
+
+
+
+
+
+
+
