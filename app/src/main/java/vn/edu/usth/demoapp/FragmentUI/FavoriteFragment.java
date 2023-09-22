@@ -10,6 +10,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.Gravity;
@@ -23,15 +25,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import vn.edu.usth.demoapp.ActivityUI.MainActivity;
 import vn.edu.usth.demoapp.ActivityUI.SearchResultActivity;
+import vn.edu.usth.demoapp.AdapterUI.FoodAdapter;
+import vn.edu.usth.demoapp.ObjectUI.Food;
 import vn.edu.usth.demoapp.R;
 
 public class FavoriteFragment extends Fragment {
 
     private View mView;
+    private RecyclerView rcvFood;
+    private FoodAdapter foodAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,8 +82,18 @@ public class FavoriteFragment extends Fragment {
 
 
         } else {
-            Toast.makeText(requireActivity(), "Logged in", Toast.LENGTH_SHORT).show();
-            mView = inflater.inflate(R.layout.fragment_favorite, container, false);
+            mView = inflater.inflate(R.layout.fragment_explore, container, false);
+            rcvFood = mView.findViewById(R.id.rcv_food);
+            foodAdapter = new FoodAdapter(requireContext());
+
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
+            rcvFood.setLayoutManager(gridLayoutManager);
+            List<Food> list = getListFood();
+
+            foodAdapter.setData(getListFood());
+            rcvFood.setAdapter(foodAdapter);
+
+            return mView;
         }
 
 
@@ -145,5 +163,23 @@ public class FavoriteFragment extends Fragment {
 
         dialog.show();
 
+    }
+    private List<Food> getListFood(){
+        List<Food> list = new ArrayList<>();
+        list.add(new Food(R.drawable.appetizers, "Appetizers", randomStar(), "This is appetizers recipe that you can make at home"));
+        list.add(new Food(R.drawable.breakfast, "Breakfast", randomStar(), "This is breakfast recipe that you can make at home"));
+
+        for (int i = 0; i < list.size(); i++) {
+            int randomIndexToSwap = (int) (Math.random() * list.size());
+            Food temp = list.get(randomIndexToSwap);
+            list.set(randomIndexToSwap, list.get(i));
+            list.set(i, temp);
+        }
+
+        return list;
+    }
+
+    private float randomStar(){
+        return (float) (Math.random() * 2 + 3);
     }
 }
