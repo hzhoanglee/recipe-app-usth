@@ -1,13 +1,16 @@
 package vn.edu.usth.demoapp.FragmentUI;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -38,6 +41,8 @@ public class HomeFragment extends Fragment {
         CarouselViewPager.setAdapter(photoAdapter);
         CarouselIndicator.setViewPager(CarouselViewPager);
 
+        handleAds();
+
         return mView;
     }
 
@@ -48,4 +53,17 @@ public class HomeFragment extends Fragment {
         list.add(new Photo(R.drawable.place_holder, "Steak3"));
         return list;
     }
+
+    private void handleAds() {
+        SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(requireContext());
+        boolean allow_ads = sharedPreferences1.getBoolean("allow_ads", true);
+        if(!allow_ads) {
+            TextView ads = mView.findViewById(R.id.ad_area);
+            if(ads != null) {
+                ads.setVisibility(View.GONE);
+            }
+        }
+    }
+
+
 }
