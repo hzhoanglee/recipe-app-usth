@@ -1,25 +1,21 @@
-package vn.edu.usth.demoapp.AdapterUI;
+package vn.edu.usth.demoapp.adapter_ui;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import vn.edu.usth.demoapp.ActivityUI.MainActivity;
-import vn.edu.usth.demoapp.ActivityUI.SearchResultActivity;
-import vn.edu.usth.demoapp.ObjectUI.Category;
+import vn.edu.usth.demoapp.activity_ui.SearchResultActivity;
+import vn.edu.usth.demoapp.object_ui.Category;
 import vn.edu.usth.demoapp.R;
 
 public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapter.HomeCategoryViewHolder> {
@@ -54,16 +50,13 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
         holder.imgCategory.setImageResource(category.getResourceId());
         holder.nameCategory.setText(category.getName());
 
-        holder.imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putString("search_param", category.getName());
-                b.putString("type", "category");
-                Intent intent = new Intent(mContext, SearchResultActivity.class);
-                intent.putExtras(b);
-                mContext.startActivity(intent);
-            }
+        holder.imageButton.setOnClickListener(v -> {
+            Bundle b = new Bundle();
+            b.putString("search_param", category.getName());
+            b.putString("type", "category");
+            Intent intent = new Intent(mContext, SearchResultActivity.class);
+            intent.putExtras(b);
+            mContext.startActivity(intent);
         });
     }
 

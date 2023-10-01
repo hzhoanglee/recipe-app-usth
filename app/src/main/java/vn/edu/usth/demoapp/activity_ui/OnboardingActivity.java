@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp.ActivityUI;
+package vn.edu.usth.demoapp.activity_ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

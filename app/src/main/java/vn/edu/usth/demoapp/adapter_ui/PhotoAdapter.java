@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp.AdapterUI;
+package vn.edu.usth.demoapp.adapter_ui;
 
 import android.os.Bundle;
 
@@ -9,8 +9,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.List;
 
-import vn.edu.usth.demoapp.FragmentUI.PhotoFragment;
-import vn.edu.usth.demoapp.ObjectUI.Photo;
+import vn.edu.usth.demoapp.fragment_ui.PhotoFragment;
+import vn.edu.usth.demoapp.object_ui.Photo;
 
 public class PhotoAdapter extends FragmentStateAdapter {
 

@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    tools:context=".FragmentUI.PhotoFragment">
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    tools:context=".fragment_ui.PhotoFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardPhoto"
@@ -14,6 +14,15 @@
         android:layout_height="match_parent"
         android:clickable="true"
         app:cardCornerRadius="15dp">
+
+        <ProgressBar
+            android:id="@+id/loadingPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/TopBarLight"
+            android:indeterminate="true" />
 
         <ImageView
             android:id="@+id/imgPhoto"

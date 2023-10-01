@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp.ActivityUI;
+package vn.edu.usth.demoapp.activity_ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import java.util.Objects;
 
-import vn.edu.usth.demoapp.FragmentUI.ExploreFragment;
+import vn.edu.usth.demoapp.fragment_ui.ExploreFragment;
 import vn.edu.usth.demoapp.R;
 
 public class SearchResultActivity extends AppCompatActivity {
@@ -55,11 +55,6 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     private void handleBack() {
-        findViewById(R.id.SettingBackButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        findViewById(R.id.SettingBackButton).setOnClickListener(v -> finish());
     }
 }

@@ -10,6 +10,16 @@
         android:layout_height="wrap_content"
         android:padding="6dp">
 
+        <ProgressBar
+            android:id="@+id/loadingPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingBottom="60dp"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/TopBarLight"
+            android:indeterminate="true" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_user_home_recent"
             android:layout_width="180dp"
@@ -18,14 +28,14 @@
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/roundedImageView"
-            android:src="@drawable/desserts"/>
+            />
 
         <TextView
             android:id="@+id/tv_home_recent_name"
             android:layout_below="@id/img_user_home_recent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
+            android:text="@string/loading"
             style="@style/TextColorFont"
             android:textStyle="bold"
             android:textSize="16sp"
@@ -37,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextColorFontSmaller"
-            android:text="@string/placeholder"
+            android:text="@string/loading"
             android:padding="6dp"/>
 
 

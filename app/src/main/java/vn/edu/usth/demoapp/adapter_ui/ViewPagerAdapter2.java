@@ -1,16 +1,14 @@
-package vn.edu.usth.demoapp.AdapterUI;
-
-import android.widget.TextView;
+package vn.edu.usth.demoapp.adapter_ui;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import vn.edu.usth.demoapp.FragmentUI.CategoryFragment;
-import vn.edu.usth.demoapp.FragmentUI.ExploreFragment;
-import vn.edu.usth.demoapp.FragmentUI.FavoriteFragment;
-import vn.edu.usth.demoapp.FragmentUI.HomeFragment;
+import vn.edu.usth.demoapp.fragment_ui.CategoryFragment;
+import vn.edu.usth.demoapp.fragment_ui.ExploreFragment;
+import vn.edu.usth.demoapp.fragment_ui.FavoriteFragment;
+import vn.edu.usth.demoapp.fragment_ui.HomeFragment;
 
 public class ViewPagerAdapter2 extends FragmentStateAdapter {
 

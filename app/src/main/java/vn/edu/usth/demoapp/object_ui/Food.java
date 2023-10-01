@@ -1,21 +1,21 @@
-package vn.edu.usth.demoapp.ObjectUI;
+package vn.edu.usth.demoapp.object_ui;
 
 public class Food {
 
     private String description;
     private float star;
-    private int resourceImage;
+    private String urlImage;
     private String name;
 
-    public Food(int resourceImage, String name, float star, String description) {
-        this.resourceImage = resourceImage;
+    public Food(String urlImage, String name, float star, String description) {
+        this.urlImage = urlImage;
         this.name = name;
         this.star = star;
         this.description = description;
     }
 
-    public int getResourceImage() {
-        return resourceImage;
+    public String getUrlImage() {
+        return urlImage;
     }
 
     public String getName() {
@@ -30,8 +30,8 @@ public class Food {
         return description;
     }
 
-    public void setResourceImage(int resourceImage) {
-        this.resourceImage = resourceImage;
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 
     public void setName(String name) {

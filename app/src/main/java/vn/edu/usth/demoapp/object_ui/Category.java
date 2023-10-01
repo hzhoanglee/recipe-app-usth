@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp.ObjectUI;
+package vn.edu.usth.demoapp.object_ui;
 
 public class Category {
     private int resourceId;

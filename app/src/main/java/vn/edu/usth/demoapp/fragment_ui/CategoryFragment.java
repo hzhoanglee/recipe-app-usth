@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp.FragmentUI;
+package vn.edu.usth.demoapp.fragment_ui;
 
 import android.os.Bundle;
 
@@ -9,24 +9,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.edu.usth.demoapp.AdapterUI.CategoryAdapter;
-import vn.edu.usth.demoapp.ObjectUI.Category;
+import vn.edu.usth.demoapp.adapter_ui.CategoryAdapter;
+import vn.edu.usth.demoapp.object_ui.Category;
 import vn.edu.usth.demoapp.R;
 
 public class CategoryFragment extends Fragment {
-    private RecyclerView rcvCategory;
-    private CategoryAdapter categoryAdapter;
-    private View mView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        CategoryAdapter categoryAdapter;
+        RecyclerView rcvCategory;
+        View mView;
         mView = inflater.inflate(R.layout.fragment_category, container, false);
 
         rcvCategory = mView.findViewById(R.id.rcv_category);
