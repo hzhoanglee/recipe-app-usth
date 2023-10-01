@@ -1,28 +1,28 @@
-package vn.edu.usth.demoapp.ObjectUI;
+package vn.edu.usth.demoapp.object_ui;
 
 import java.io.Serializable;
 
 public class Photo implements Serializable {
-    private int imgResourceID;
+    private String imgURL;
     private String textResource;
 
     //constructor
-    public Photo(int resourceID, String textResource) {
-        this.imgResourceID = resourceID;
+    public Photo(String imgURL, String textResource) {
+        this.imgURL = imgURL;
         this.textResource = textResource;
     }
 
     //getter
-    public int getImgResourceID() {
-        return imgResourceID;
+    public String getImgURL() {
+        return imgURL;
     }
     public String getTextResource() {
         return textResource;
     }
 
     //setter
-    public void setImgResourceID(int resourceID) {
-        this.imgResourceID = resourceID;
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
     public void setTextResource(String textResource) {
         this.textResource = textResource;

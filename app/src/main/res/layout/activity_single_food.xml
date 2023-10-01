@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    style="@style/Base.Theme.DemoApp"
     >
 
     <!-- appbar with back button on the left and title next to it -->
@@ -104,12 +105,25 @@
                 android:layout_width="match_parent"
                 app:cardCornerRadius="15dp"
                 android:layout_height="203dp">
-                <ImageView
-                    android:id="@+id/RecipeImageViewDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/place_holder" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                        <ProgressBar
+                            android:id="@+id/loadingPanel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:indeterminateTintMode="src_atop"
+                            android:indeterminateTint="@color/TopBarLight"
+                            android:indeterminate="true" />
+
+                    <ImageView
+                        android:id="@+id/RecipeImageViewDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- Recipe Name -->
@@ -118,7 +132,7 @@
                 android:layout_below="@+id/imageViewPhotoDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/placeholder"
+                android:text="@string/loading"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 />
@@ -159,7 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextColorFontSmall"
-                android:text="@string/title_nav_favorite"
+                android:text="@string/loading"
                 />
 
 
@@ -188,17 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextColorFontSmall"
-                android:text="
-- 320g pack chicken mini breast fillets\n
-- 2½ tbsp light soy sauce\n
-- vegetable oil, for frying\n
-- 1 red pepper, deseeded and thinly sliced\n
-- 1 green pepper, deseeded and thinly sliced\n
-- 3 tbsp cornflour\n
-- 3 tbsp sweet chilli sauce\n
-- 1 tbsp garlic and ginger paste\n
-- 1 tbsp sesame oil\n
-- 2 spring onions, trimmed and finely sliced"
+                android:text="@string/loading"
                 android:textSize="16sp"
                 />
 
@@ -218,17 +222,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TextColorFontSmall"
-                android:text="
-STEP 1\n
-Slice the chicken into thin strips. Pour over 2 tbsp of the soy and marinate in the fridge, covered, for 1 hr.\n
-STEP 2\n
-Meanwhile, heat 1 tbsp of the oil in a wok or deep frying pan over a medium heat and cook the peppers for 3-4 mins until just beginning to soften. Remove with a slotted spoon and set aside.\n
-STEP 3\n
-Spread the cornflour out in a shallow bowl. Season, then add the marinated chicken strips and toss to coat well.\n
-STEP 4\n
-Fill a wok or deep frying pan with the oil so it’s about ½cm deep, then heat to medium-high. Carefully add the chicken in batches, cooking for 3-4 mins, using tongs to turn regularly until golden and crispy. Remove with a slotted spoon and place on a plate lined with kitchen paper to drain.\n
-STEP 5\n
-Mix together the remaining soy, sweet chilli, garlic paste and sesame oil in a large bowl. Add the cooked peppers, crispy chicken and toss together until coated all over and sticky. Serve sprinkled with the spring onions."
+                android:text="@string/loading"
                 android:textSize="16sp"
                 />
 

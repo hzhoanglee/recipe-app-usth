@@ -1,9 +1,8 @@
-package vn.edu.usth.demoapp.ActivityUI;
+package vn.edu.usth.demoapp.activity_ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Dialog;
@@ -20,33 +19,37 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.WindowManager.LayoutParams;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import vn.edu.usth.demoapp.R;
-import vn.edu.usth.demoapp.AdapterUI.ViewPagerAdapter2;
+import vn.edu.usth.demoapp.adapter_ui.ViewPagerAdapter2;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager2 mViewPager2;
+
     private BottomNavigationView mBottomNavigationView;
     private TextView appTitle;
-    private Switch modeSwitch;
+
+    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ViewPager2 mViewPager2;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        requestQueue = Volley.newRequestQueue(this);
 
         if (checkFirstRun()) {
             Intent onboardingIntent = new Intent(this, OnboardingActivity.class);
@@ -57,35 +60,32 @@ public class MainActivity extends AppCompatActivity {
             mViewPager2 = findViewById(R.id.viewpager);
             mBottomNavigationView = findViewById(R.id.bottom_navigation);
 
-            ViewPagerAdapter2 MyViewAdapter = new ViewPagerAdapter2(this);
-            mViewPager2.setAdapter(MyViewAdapter);
+            ViewPagerAdapter2 myViewAdapter = new ViewPagerAdapter2(this);
+            mViewPager2.setAdapter(myViewAdapter);
             mViewPager2.setUserInputEnabled(false);
             mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                 @Override
                 public void onPageSelected(int position) {
-                    appTitle.setText(MyViewAdapter.getTitle(position));
+                    appTitle.setText(myViewAdapter.getTitle(position));
                 }
             });
 
-            mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    int id = item.getItemId();
-                    if (id == R.id.navigation_home) {
-                        mViewPager2.setCurrentItem(0);
-                        appTitle.setText(getString(R.string.title_nav_home));
-                    } else if (id == R.id.navigation_recent) {
-                        mViewPager2.setCurrentItem(1);
-                        appTitle.setText(getString(R.string.title_nav_recent));
-                    } else if (id == R.id.navigation_category) {
-                        mViewPager2.setCurrentItem(2);
-                        appTitle.setText(getString(R.string.title_nav_category));
-                    } else if (id == R.id.navigation_favorite) {
-                        mViewPager2.setCurrentItem(3);
-                        appTitle.setText(getString(R.string.title_nav_favorite));
-                    }
-                    return true;
+            mBottomNavigationView.setOnItemSelectedListener(item -> {
+                int id = item.getItemId();
+                if (id == R.id.navigation_home) {
+                    mViewPager2.setCurrentItem(0);
+                    appTitle.setText(getString(R.string.title_nav_home));
+                } else if (id == R.id.navigation_recent) {
+                    mViewPager2.setCurrentItem(1);
+                    appTitle.setText(getString(R.string.title_nav_recent));
+                } else if (id == R.id.navigation_category) {
+                    mViewPager2.setCurrentItem(2);
+                    appTitle.setText(getString(R.string.title_nav_category));
+                } else if (id == R.id.navigation_favorite) {
+                    mViewPager2.setCurrentItem(3);
+                    appTitle.setText(getString(R.string.title_nav_favorite));
                 }
+                return true;
             });
 
             mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -162,13 +162,7 @@ public class MainActivity extends AppCompatActivity {
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> doubleBackToExitPressedOnce=false, 2000);
     }
 
     private void openSearchDialog(int gravity, String type) {
@@ -187,9 +181,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        LayoutParams windowAttributes = window.getAttributes();
         windowAttributes.gravity = gravity;
         window.setAttributes(windowAttributes);
 
@@ -199,35 +193,24 @@ public class MainActivity extends AppCompatActivity {
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
         Button buttonSearch = dialog.findViewById(R.id.buttonSearch);
 
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
 
         if(type.equals("search")) {
             // handle buttons for search dialog
-            buttonSearch.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // get search param from editSearch
-                    Toast.makeText(MainActivity.this, "Search: " + editSearch.getText().toString(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("search_param", editSearch.getText().toString());
-                    intent.putExtras(b);
-                    startActivity(intent);
-                }
+            buttonSearch.setOnClickListener(v -> {
+                // get search param from editSearch
+                Toast.makeText(MainActivity.this, "Search: " + editSearch.getText().toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
+                Bundle b = new Bundle();
+                b.putString("search_param", editSearch.getText().toString());
+                intent.putExtras(b);
+                startActivity(intent);
             });
         } else if (type.equals("request_recipe")) {
             // handle buttons for request recipe dialog
-            buttonSearch.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Thank you for requesting: " + editSearch.getText().toString(), Toast.LENGTH_SHORT).show();
-                }
+            buttonSearch.setOnClickListener(v -> {
+                dialog.dismiss();
+                Toast.makeText(MainActivity.this, "Thank you for requesting: " + editSearch.getText().toString(), Toast.LENGTH_SHORT).show();
             });
         } else {
             Toast.makeText(MainActivity.this, "Error: Invalid dialog type", Toast.LENGTH_SHORT).show();
@@ -241,6 +224,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkFirstRun() {
         SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
         return sharedPreferences.getBoolean("isFirstRun", true);
+    }
+
+    public RequestQueue getRequestQueue() {
+        return requestQueue;
     }
 
 }

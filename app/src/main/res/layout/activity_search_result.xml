@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityUI.SearchResultActivity">
+    tools:context=".activity_ui.SearchResultActivity">
     <include
         android:id="@+id/container_header_lyt"
         android:layout_height="wrap_content"

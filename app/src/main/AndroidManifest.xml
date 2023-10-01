@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,30 +14,28 @@
         android:theme="@style/Base.Theme.DemoApp"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityUI.SingleFoodActivity"
+            android:name=".activity_ui.SingleFoodActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityUI.SearchResultActivity"
+            android:name=".activity_ui.SearchResultActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityUI.AboutActivity"
+            android:name=".activity_ui.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityUI.SettingsActivity"
+            android:name=".activity_ui.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".ActivityUI.OnboardingActivity"
+            android:name=".activity_ui.OnboardingActivity"
             android:exported="true">
             <intent-filter>
-
-                <!-- <action android:name="android.intent.action.MAIN" /> -->
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityUI.MainActivity"
+            android:name=".activity_ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

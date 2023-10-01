@@ -1,4 +1,4 @@
-package vn.edu.usth.demoapp.FragmentUI;
+package vn.edu.usth.demoapp.fragment_ui;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -9,11 +9,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,22 +27,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import vn.edu.usth.demoapp.ActivityUI.MainActivity;
-import vn.edu.usth.demoapp.ActivityUI.SearchResultActivity;
-import vn.edu.usth.demoapp.AdapterUI.FoodAdapter;
-import vn.edu.usth.demoapp.ObjectUI.Food;
+import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
+import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.R;
 
 public class FavoriteFragment extends Fragment {
 
-    private View mView;
-    private RecyclerView rcvFood;
-    private FoodAdapter foodAdapter;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        FoodAdapter foodAdapter;
+        RecyclerView rcvFood;
+        View mView;
 
         SharedPreferences sharedPreferences = this.requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
@@ -54,31 +52,23 @@ public class FavoriteFragment extends Fragment {
             Button loginButton = mView.findViewById(R.id.buttonLogin);
 
             // set on click listener
-            loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("isLoggedIn", true);
-                    editor.apply();
+            loginButton.setOnClickListener(v -> {
+                SharedPreferences sharedPreferences1 = requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences1.edit();
+                editor.putBoolean("isLoggedIn", true);
+                editor.apply();
 
-                    Toast.makeText(requireActivity(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), "Logged in successfully", Toast.LENGTH_SHORT).show();
 
-                    // reload app
-                    Intent intent = requireActivity().getIntent();
-                    requireActivity().finish();
-                    startActivity(intent);
+                // reload app
+                Intent intent = requireActivity().getIntent();
+                requireActivity().finish();
+                startActivity(intent);
 
-                }
             });
 
             TextView createAccount = mView.findViewById(R.id.textViewCreateAccount);
-            createAccount.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openSearchDialog(Gravity.CENTER, "create_account");
-                }
-            });
+            createAccount.setOnClickListener(v -> openSearchDialog(Gravity.CENTER, "create_account"));
 
 
         } else {
@@ -88,7 +78,7 @@ public class FavoriteFragment extends Fragment {
 
             GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
             rcvFood.setLayoutManager(gridLayoutManager);
-            List<Food> list = getListFood();
+            //List<Food> list = getListFood();
 
             foodAdapter.setData(getListFood());
             rcvFood.setAdapter(foodAdapter);
@@ -125,35 +115,27 @@ public class FavoriteFragment extends Fragment {
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
         Button buttonSearch = dialog.findViewById(R.id.buttonSearch);
 
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
 
         if(type.equals("create_account")) {
             // handle buttons for search dialog
             EditText editUsername = dialog.findViewById(R.id.edit_username);
             EditText editPassword = dialog.findViewById(R.id.edit_password);
             EditText editRePassword = dialog.findViewById(R.id.edit_re_password);
-            buttonSearch.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(!editPassword.getText().toString().equals(editRePassword.getText().toString())) {
-                        Toast.makeText(requireContext(), "Error: Passwords do not match", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    Toast.makeText(requireContext(), "Welcome: " + editUsername.getText().toString(), Toast.LENGTH_SHORT).show();
-                    SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("isLoggedIn", true);
-                    editor.apply();
-
-                    Intent intent = requireActivity().getIntent();
-                    requireActivity().finish();
-                    startActivity(intent);
+            buttonSearch.setOnClickListener(v -> {
+                if(!editPassword.getText().toString().equals(editRePassword.getText().toString())) {
+                    Toast.makeText(requireContext(), "Error: Passwords do not match", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                Toast.makeText(requireContext(), "Welcome: " + editUsername.getText().toString(), Toast.LENGTH_SHORT).show();
+                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isLoggedIn", true);
+                editor.apply();
+
+                Intent intent = requireActivity().getIntent();
+                requireActivity().finish();
+                startActivity(intent);
             });
 
         } else {
@@ -165,9 +147,11 @@ public class FavoriteFragment extends Fragment {
 
     }
     private List<Food> getListFood(){
+        String tmp_url = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
+
         List<Food> list = new ArrayList<>();
-        list.add(new Food(R.drawable.appetizers, "Appetizers", randomStar(), "This is appetizers recipe that you can make at home"));
-        list.add(new Food(R.drawable.breakfast, "Breakfast", randomStar(), "This is breakfast recipe that you can make at home"));
+        list.add(new Food(tmp_url, "Appetizers", randomStar(), "This is appetizers recipe that you can make at home"));
+        list.add(new Food(tmp_url, "Breakfast", randomStar(), "This is breakfast recipe that you can make at home"));
 
         for (int i = 0; i < list.size(); i++) {
             int randomIndexToSwap = (int) (Math.random() * list.size());
