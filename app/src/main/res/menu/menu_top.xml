@@ -16,6 +16,11 @@
         android:iconTint="@color/black"/>
 
     <item
+        android:id="@+id/action_hello"
+        android:title="@string/app_name"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_settings"
         android:title="@string/Settings"
         app:showAsAction="never" />

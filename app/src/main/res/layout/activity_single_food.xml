@@ -3,6 +3,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -185,46 +186,16 @@
                 style="@style/HLine"
                 />
 
-            <!-- Ingredients -->
-            <TextView
-                android:id="@+id/IngredientsViewPhotoTitle"
+            <!-- Load HTML -->
+            <WebView
+                android:id="@+id/FoodWebView"
                 android:layout_below="@+id/ViewLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TextColorFontSmall"
-                android:text="@string/ingredients"
-                android:textSize="24sp"
-                />
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                tools:ignore="WebViewLayout" />
 
-            <TextView
-                android:id="@+id/IngredientsViewPhotoContent"
-                android:layout_below="@+id/IngredientsViewPhotoTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/TextColorFontSmall"
-                android:text="@string/loading"
-                android:textSize="16sp"
-                />
-
-            <TextView
-                android:id="@+id/MethodViewPhotoTitle"
-                android:layout_below="@+id/IngredientsViewPhotoContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/TextColorFontSmall"
-                android:text="@string/method"
-                android:textSize="24sp"
-                />
-
-            <TextView
-                android:id="@+id/MethodViewPhotoContent"
-                android:layout_below="@+id/MethodViewPhotoTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/TextColorFontSmall"
-                android:text="@string/loading"
-                android:textSize="16sp"
-                />
 
         </RelativeLayout>
     </ScrollView>

@@ -107,12 +107,12 @@ public class HomeFragment extends Fragment {
         String tmp_url = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
 
         List<Food> list = new ArrayList<>();
-        list.add(new Food(tmp_url, "Appetizers", 0, "This is appetizers recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Breakfast", 0, "This is breakfast recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Main dish", 0, "This is main dish recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Side dish", 0, "This is side dish recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Desserts", 0, "This is desserts recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Drinks", 0, "This is drinks recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Appetizers", 0, "This is appetizers recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Breakfast", 0, "This is breakfast recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Main dish", 0, "This is main dish recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Side dish", 0, "This is side dish recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Desserts", 0, "This is desserts recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Drinks", 0, "This is drinks recipe that you can make at home"));
         return list;
     }
 
@@ -120,12 +120,12 @@ public class HomeFragment extends Fragment {
         String tmp_url = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
 
         List<Food> list = new ArrayList<>();
-        list.add(new Food(tmp_url, "Appetizers", 0, "This is appetizers recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Breakfast", 0, "This is breakfast recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Main dish", 0, "This is main dish recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Side dish", 0, "This is side dish recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Desserts", 0, "This is desserts recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Drinks", 0, "This is drinks recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Appetizers", 0, "This is appetizers recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Breakfast", 0, "This is breakfast recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Main dish", 0, "This is main dish recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Side dish", 0, "This is side dish recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Desserts", 0, "This is desserts recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Drinks", 0, "This is drinks recipe that you can make at home"));
         return list;
     }
 }

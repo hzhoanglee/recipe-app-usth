@@ -1,11 +1,14 @@
 package vn.edu.usth.demoapp.activity_ui;
 
+import static vn.edu.usth.demoapp.network_controller.Helpers.trimContent;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -36,17 +39,24 @@ public class SingleFoodActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if(b != null && (Objects.equals(b.getString("type"), "recipe_item"))) {
                 String itemValue = b.getString("food_name");
-                String titleValue = "Recipe: " + itemValue;
-                setTitle(titleValue);
-                setFoodName(itemValue);
-                setDescription(b.getString("food_description"));
-                setRating(b.getFloat("food_rate"));
+                if(itemValue != null) {
+                    String titleValue = "Recipe: " + trimContent(itemValue, 20);
+                    setTitle(titleValue);
+                    setFoodName(itemValue);
+                    setDescription(b.getString("food_description"));
+                    setFoodIngredientsAndSteps(b.getString("food_html"));
+                    setRating(b.getFloat("food_rate"));
 
-                // Check if an image URL is provided, and load the image using Glide
-                if (b.containsKey("food_url")) {
-                    String imageUrl = b.getString("food_url");
-                    setFoodImage(imageUrl);
+                    // Check if an image URL is provided, and load the image using Glide
+                    if (b.containsKey("food_url")) {
+                        String imageUrl = b.getString("food_url");
+                        setFoodImage(imageUrl);
+                    }
+                } else {
+                    Toast.makeText(mContext, "Error while loading recipe", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
+
 
         }
 
@@ -78,6 +88,11 @@ public class SingleFoodActivity extends AppCompatActivity {
     private void setRating(Float rating) {
         RatingBar ratingBar = findViewById(R.id.ViewRating);
         ratingBar.setRating(rating);
+    }
+
+    private void setFoodIngredientsAndSteps(String detail) {
+        WebView webview = findViewById(R.id.FoodWebView);
+        webview.loadData(detail, "text/html", null);
     }
 
     private void handleBack() {
