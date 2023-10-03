@@ -1,27 +1,43 @@
 package vn.edu.usth.demoapp.fragment_ui;
 
+import static vn.edu.usth.demoapp.network_controller.Helpers.showLoadingDialog;
+
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.android.volley.VolleyError;
+
 import java.util.List;
 
 import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
+import vn.edu.usth.demoapp.interface_controller.FoodCallback;
+import vn.edu.usth.demoapp.interface_controller.FoodListCallback;
+import vn.edu.usth.demoapp.network_controller.RecipeController;
 import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.R;
 
 public class ExploreFragment extends Fragment {
 
+    private List<Food> list;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Dialog dialog = showLoadingDialog(requireContext());
+
         FoodAdapter foodAdapter;
         RecyclerView rcvFood;
         View mView;
@@ -31,41 +47,40 @@ public class ExploreFragment extends Fragment {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
         rcvFood.setLayoutManager(gridLayoutManager);
-        //List <Food> list = getListFood();
-
-        foodAdapter.setData(getListFood());
-        rcvFood.setAdapter(foodAdapter);
-
+        getListFood(new FoodCallback() {
+            @Override
+            public void onFoodListReceived(List<Food> foodList) {
+                foodAdapter.setData(foodList);
+                if(dialog != null)
+                    dialog.dismiss();
+                rcvFood.setAdapter(foodAdapter);
+            }
+            @Override
+            public void onError(VolleyError error) {
+                list = null;
+            }
+        });
         return mView;
     }
 
-    private List<Food> getListFood(){
-        String tmp_url = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
-        List<Food> list = new ArrayList<>();
-        list.add(new Food(tmp_url, "Appetizers", randomStar(), "This is appetizers recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Breakfast", randomStar(), "This is breakfast recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Main dish", randomStar(), "This is main dish recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Side dish", randomStar(), "This is side dish recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Desserts", randomStar(), "This is desserts recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Drinks", randomStar(), "This is drinks recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Appetizers", randomStar(), "Another appetizers recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Breakfast", randomStar(), "Just another breakfast recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Main dish", randomStar(), "More main dish recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Side dish", randomStar(), "OMG, more side dish recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Desserts", randomStar(), "Can you believe it? More desserts recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Drinks", randomStar(), "If you are bored, you can make this drinks recipe at home"));
-        
-        for (int i = 0; i < list.size(); i++) {
-            int randomIndexToSwap = (int) (Math.random() * list.size());
-            Food temp = list.get(randomIndexToSwap);
-            list.set(randomIndexToSwap, list.get(i));
-            list.set(i, temp);
-        }
+    private void getListFood(FoodCallback callback) {
+        RecipeController recipeController = new RecipeController();
+        recipeController.getExploreList(requireContext(), new FoodListCallback() {
+            @Override
+            public void onSuccess(List<Food> result) {
+                callback.onFoodListReceived(result);
+            }
 
-        return list;
+            @Override
+            public void onError(VolleyError error) {
+                callback.onError(error);
+            }
+        });
     }
-    
-    private float randomStar(){
-        return (float) (Math.random() * 2 + 3);
-    }
+
+
+
+
+
+
 }

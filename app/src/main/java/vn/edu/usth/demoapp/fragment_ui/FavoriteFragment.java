@@ -25,10 +25,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
+import vn.edu.usth.demoapp.interface_controller.StatusCallback;
+import vn.edu.usth.demoapp.network_controller.UserController;
 import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.R;
 
@@ -45,30 +49,32 @@ public class FavoriteFragment extends Fragment {
         SharedPreferences sharedPreferences = this.requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
         if (!isLoggedIn) {
-            // get shared preferences
             mView = inflater.inflate(R.layout.fragment_favorite_login, container, false);
-
-            // get button
             Button loginButton = mView.findViewById(R.id.buttonLogin);
-
-            // set on click listener
             loginButton.setOnClickListener(v -> {
-                SharedPreferences sharedPreferences1 = requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences1.edit();
-                editor.putBoolean("isLoggedIn", true);
-                editor.apply();
+                // get username and password from edit text
+                EditText editUsername = mView.findViewById(R.id.editTextUsername);
+                EditText editPassword = mView.findViewById(R.id.editTextPassword);
 
-                Toast.makeText(requireActivity(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+                UserController userController = new UserController();
+                userController.userLogin(editUsername.getText().toString(), editPassword.getText().toString(), requireContext(), new StatusCallback() {
+                    @Override
+                    public void onStatusOK(boolean success) {
+                        Intent intent = requireActivity().getIntent();
+                        requireActivity().finish();
+                        startActivity(intent);
+                    }
 
-                // reload app
-                Intent intent = requireActivity().getIntent();
-                requireActivity().finish();
-                startActivity(intent);
+                    @Override
+                    public void onError(VolleyError error) {
+                        Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             });
 
             TextView createAccount = mView.findViewById(R.id.textViewCreateAccount);
-            createAccount.setOnClickListener(v -> openSearchDialog(Gravity.CENTER, "create_account"));
+            createAccount.setOnClickListener(v -> openRegisterDialog(Gravity.CENTER, "create_account"));
 
 
         } else {
@@ -90,7 +96,7 @@ public class FavoriteFragment extends Fragment {
         return mView;
     }
 
-    private void openSearchDialog(int gravity, String type) {
+    private void openRegisterDialog(int gravity, String type) {
         final Dialog dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         if(type.equals("create_account"))
@@ -150,8 +156,8 @@ public class FavoriteFragment extends Fragment {
         String tmp_url = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
 
         List<Food> list = new ArrayList<>();
-        list.add(new Food(tmp_url, "Appetizers", randomStar(), "This is appetizers recipe that you can make at home"));
-        list.add(new Food(tmp_url, "Breakfast", randomStar(), "This is breakfast recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Appetizers", randomStar(), "This is appetizers recipe that you can make at home"));
+//        list.add(new Food(tmp_url, "Breakfast", randomStar(), "This is breakfast recipe that you can make at home"));
 
         for (int i = 0; i < list.size(); i++) {
             int randomIndexToSwap = (int) (Math.random() * list.size());
@@ -166,4 +172,20 @@ public class FavoriteFragment extends Fragment {
     private float randomStar(){
         return (float) (Math.random() * 2 + 3);
     }
+
+    private void userLogin(StatusCallback callback, String username, String password) {
+        UserController userController = new UserController();
+        userController.userLogin(username, password, requireContext(), new StatusCallback() {
+            @Override
+            public void onStatusOK(boolean status) {
+                callback.onStatusOK(status);
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                callback.onError(error);
+            }
+        });
+    }
+
 }

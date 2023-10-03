@@ -74,6 +74,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             b.putString("food_url", food.getUrlImage());
             b.putFloat("food_rate", food.getStar());
             b.putString("food_description", food.getDescription());
+            b.putString("food_html", food.getHtmlContent());
             b.putString("type", "recipe_item");
             Intent intent = new Intent(mContext, SingleFoodActivity.class);
             intent.putExtras(b);

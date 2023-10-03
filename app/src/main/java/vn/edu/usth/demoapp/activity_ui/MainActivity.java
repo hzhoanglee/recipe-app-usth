@@ -1,5 +1,7 @@
 package vn.edu.usth.demoapp.activity_ui;
 
+import static vn.edu.usth.demoapp.network_controller.Helpers.storeSharedPreferenceLogout;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -102,13 +104,13 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_top, menu);
 
-        // if user is not logged in, hide logout button
         SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
         if (!isLoggedIn) {
             menu.findItem(R.id.action_logout).setVisible(false);
+        } else {
+            menu.findItem(R.id.action_hello).setTitle("Hello, " + sharedPreferences.getString("user_name", "User") + "!");
         }
-
         return true;
     }
 
@@ -133,10 +135,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.action_logout) {
-            SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("isLoggedIn", false);
-            editor.apply();
+            storeSharedPreferenceLogout(this);
             Toast.makeText(MainActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
             Intent intent = getIntent();
             finish();

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Your Recipes</string>
+    <string name="app_name_short">Your Recipes</string>
+    <string name="api_endpoint">https://api.recipe.hz.edu.vn/api/</string>
 
     <!--bottom navigation title-->
     <string name="title_nav_home">Home</string>
@@ -24,6 +26,7 @@
     <string name="ingredients">Ingredients</string>
     <string name="steps">Steps</string>
     <string name="method">Method</string>
+    <string name="loading_dialog">Loading</string>
 
 
 
