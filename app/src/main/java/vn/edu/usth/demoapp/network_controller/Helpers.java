@@ -69,4 +69,8 @@ public class Helpers {
                 .apply();
     }
 
+    public static String convertToUriQuery(String query) {
+        return query.replace(" ", "%20");
+    }
+
 }
