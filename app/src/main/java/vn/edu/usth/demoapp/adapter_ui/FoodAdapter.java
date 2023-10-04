@@ -65,6 +65,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.tvName.setText(food.getName());
         holder.ratingBar.setRating(food.getStar());
         holder.tv_description.setText(food.getDescription());
+        holder.tv_prepare_time.setText(food.getPrepTime());
+        holder.tv_cook_time.setText(food.getCookTime());
+        holder.tv_level.setText(food.getLevel());
 
         loadImageUsingVolley(food.getUrlImage(), holder.imgFood);
 
@@ -76,6 +79,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             b.putString("food_description", food.getDescription());
             b.putString("food_html", food.getHtmlContent());
             b.putString("type", "recipe_item");
+            b.putInt("food_id", food.getId());
+            b.putString("food_category", food.getCategory());
+            b.putString("food_prep_time", food.getPrepTime());
+            b.putString("food_cook_time", food.getCookTime());
+            b.putString("food_level", food.getLevel());
             Intent intent = new Intent(mContext, SingleFoodActivity.class);
             intent.putExtras(b);
             mContext.startActivity(intent);
@@ -98,12 +106,19 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         private RatingBar ratingBar;
         private TextView tv_description;
 
+        private TextView tv_prepare_time;
+        private TextView tv_cook_time;
+        private TextView tv_level;
+
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
             imgFood = itemView.findViewById(R.id.img_user);
             tvName = itemView.findViewById(R.id.tv_name);
             ratingBar = itemView.findViewById(R.id.ratingBar);
             tv_description = itemView.findViewById(R.id.tv_description);
+            tv_prepare_time = itemView.findViewById(R.id.tv_prepare_time);
+            tv_cook_time = itemView.findViewById(R.id.tv_cook_time);
+            tv_level = itemView.findViewById(R.id.tv_level);
         }
     }
 
