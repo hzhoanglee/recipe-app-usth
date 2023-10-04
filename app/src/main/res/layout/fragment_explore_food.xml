@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Base.Theme.DemoApp"
     app:cardCornerRadius="15dp"
     android:layout_margin="5dp">
 
@@ -41,7 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loading"
-            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="16sp"
             android:padding="6dp"/>
@@ -75,7 +75,6 @@
                 android:layout_marginTop="-6dp"
                 android:padding="6dp"
                 android:text="@string/loading"
-                android:textColor="@color/BottomIconLightText"
                 android:textSize="10sp"
                 android:layout_weight="1"/>
             <TextView
@@ -85,7 +84,6 @@
                 android:layout_marginTop="-6dp"
                 android:padding="6dp"
                 android:text="@string/loading"
-                android:textColor="@color/BottomIconLightText"
                 android:textSize="10sp"
                 android:layout_weight="1"/>
             <TextView
@@ -95,7 +93,6 @@
                 android:layout_marginTop="-6dp"
                 android:padding="6dp"
                 android:text="@string/loading"
-                android:textColor="@color/BottomIconLightText"
                 android:textSize="10sp"
                 android:layout_weight="1"/>
         </LinearLayout>
@@ -110,7 +107,6 @@
             android:layout_marginTop="-6dp"
             android:padding="6dp"
             android:text="@string/loading"
-            android:textColor="@color/BottomIconLightText"
             android:textSize="12sp" />
 
 
