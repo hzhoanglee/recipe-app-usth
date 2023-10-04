@@ -10,29 +10,33 @@
         android:layout_height="wrap_content"
         android:padding="6dp">
 
-        <ProgressBar
-            android:id="@+id/loadingPanel"
+        <RelativeLayout
+            android:id="@+id/rl_image_home_recent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:paddingBottom="60dp"
-            android:indeterminateTintMode="src_atop"
-            android:indeterminateTint="@color/TopBarLight"
-            android:indeterminate="true" />
+            android:layout_height="wrap_content">
+            <ProgressBar
+                android:id="@+id/loadingPanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/TopBarLight"
+                android:indeterminate="true" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/img_user_home_recent"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:adjustViewBounds="true"
-            android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/roundedImageView"
-            />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_user_home_recent"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:adjustViewBounds="true"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_home_recent_name"
-            android:layout_below="@id/img_user_home_recent"
+            android:layout_below="@id/rl_image_home_recent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loading"
