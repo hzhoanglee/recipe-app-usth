@@ -28,15 +28,23 @@ import vn.edu.usth.demoapp.network_controller.RecipeController;
 import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.R;
 
-public class ExploreFragment extends Fragment {
+public class FoodListFragment extends Fragment {
 
     private List<Food> list;
+
+    public FoodListFragment(List <Food> list) {
+        this.list = list;
+        if (list == null) {
+            Log.e("FoodListFragment", "List is null");
+        } else {
+            Log.e("FoodListFragment", "List is not null");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Dialog dialog = showLoadingDialog(requireContext());
 
         FoodAdapter foodAdapter;
         RecyclerView rcvFood;
@@ -47,40 +55,12 @@ public class ExploreFragment extends Fragment {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
         rcvFood.setLayoutManager(gridLayoutManager);
-        getListFood(new FoodCallback() {
-            @Override
-            public void onFoodListReceived(List<Food> foodList) {
-                foodAdapter.setData(foodList);
-                if(dialog != null)
-                    dialog.dismiss();
-                rcvFood.setAdapter(foodAdapter);
-            }
-            @Override
-            public void onError(VolleyError error) {
-                list = null;
-            }
-        });
+        foodAdapter.setData(getFoodList());
+        rcvFood.setAdapter(foodAdapter);
         return mView;
     }
 
-    private void getListFood(FoodCallback callback) {
-        RecipeController recipeController = new RecipeController();
-        recipeController.getExploreList(requireContext(), new FoodListCallback() {
-            @Override
-            public void onSuccess(List<Food> result) {
-                callback.onFoodListReceived(result);
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                callback.onError(error);
-            }
-        });
+    private List<Food> getFoodList() {
+        return this.list;
     }
-
-
-
-
-
-
 }
