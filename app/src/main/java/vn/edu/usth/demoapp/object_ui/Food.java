@@ -144,4 +144,8 @@ public class Food {
     public String getHtmlContent() {
         return html_content;
     }
+
+    public Integer getId() {
+        return id;
+    }
 }
