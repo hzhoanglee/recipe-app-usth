@@ -24,7 +24,9 @@ import vn.edu.usth.demoapp.R;
 import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
 import vn.edu.usth.demoapp.adapter_ui.HomeCategoryAdapter;
 import vn.edu.usth.demoapp.adapter_ui.PhotoAdapter;
+import vn.edu.usth.demoapp.interface_controller.CategoryListCallback;
 import vn.edu.usth.demoapp.interface_controller.PhotoListCallback;
+import vn.edu.usth.demoapp.network_controller.CategoryController;
 import vn.edu.usth.demoapp.network_controller.FeaturedController;
 import vn.edu.usth.demoapp.object_ui.Category;
 import vn.edu.usth.demoapp.object_ui.Photo;
@@ -87,8 +89,20 @@ public class HomeFragment extends Fragment {
         // set category food(horizontal scroll)
         categoryAdapter = new HomeCategoryAdapter(requireContext());
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        categoryAdapter.setData(getListTypeFood());
-        recyclerViewCategory.setAdapter(categoryAdapter);
+
+        getCategoryList(new CategoryListCallback() {
+            @Override
+            public void onSuccess(List<Category> result) {
+                categoryAdapter.setData(result);
+                recyclerViewCategory.setAdapter(categoryAdapter);
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                categoryAdapter.setData(new ArrayList<>());
+                recyclerViewCategory.setAdapter(categoryAdapter);
+            }
+        });
 
         handleAds();
 
@@ -123,6 +137,21 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void getCategoryList(CategoryListCallback callback) {
+        CategoryController categoryController = new CategoryController();
+        categoryController.getCatgoryList(requireContext(), new CategoryListCallback() {
+            @Override
+            public void onSuccess(List<Category> result) {
+                callback.onSuccess(result);
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                callback.onError(error);
+            }
+        });
+    }
+
     private void handleAds() {
         SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(requireContext());
         boolean allow_ads = sharedPreferences1.getBoolean("allow_ads", true);
@@ -132,19 +161,6 @@ public class HomeFragment extends Fragment {
                 ads.setVisibility(View.GONE);
             }
         }
-    }
-
-
-
-    private List<Category> getListTypeFood(){
-        List<Category> list = new ArrayList<>();
-//        list.add(new Category(R.drawable.appetizers, "Appetizers"));
-//        list.add(new Category(R.drawable.breakfast, "Breakfast"));
-//        list.add(new Category(R.drawable.main_dish, "Main dish"));
-//        list.add(new Category(R.drawable.side_dish, "Side dish"));
-//        list.add(new Category(R.drawable.desserts, "Desserts"));
-//        list.add(new Category(R.drawable.drinks, "Drinks"));
-        return list;
     }
 
 }
