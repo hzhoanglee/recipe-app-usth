@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment {
         recyclerViewCategory = homeView.findViewById(R.id.recycler_view_category);
         recyclerViewRecent = homeView.findViewById(R.id.recycler_view_recent);
 
+        // Running Carousel
         CarouselViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -93,6 +94,7 @@ public class HomeFragment extends Fragment {
 
         return homeView;
     }
+    // Runnable
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
