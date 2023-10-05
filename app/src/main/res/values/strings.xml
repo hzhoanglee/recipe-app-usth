@@ -20,6 +20,7 @@
     <string name="Exit">Exit App</string>
     <string name="Request_Recipe">Request Recipe</string>
     <string name="Request">Request</string>
+    <string name="Notification">Notification</string>
     <string name="allow_ads">Allow Ads in App</string>
 
     <!-- Single -->

@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -66,5 +67,41 @@ public class UserController {
             }
         };
         queue.add(stringRequest);
+    }
+
+    private void registerFirebaseToken(String token, Context context) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = context.getString(R.string.api_endpoint) + "auth/firebase?token=" + token;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    Log.i("Firebase token", "Registered");
+                }, error -> {
+                    Log.i("Firebase token", "Failed");
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + getBearerToken(context));
+                return headers;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    public void regFirebaseGeneral(String token, Context context) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = context.getString(R.string.api_endpoint) + "regFirebase?token=" + token;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    Log.i("Firebase token", "Registered");
+                }, error -> {
+                    Log.i("Firebase token", "Failed");
+                });
+        queue.add(stringRequest);
+    }
+
+    private String getBearerToken(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
+        return sharedPreferences.getString("token", "");
     }
 }

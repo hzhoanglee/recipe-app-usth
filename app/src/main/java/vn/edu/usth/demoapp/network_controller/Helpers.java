@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import vn.edu.usth.demoapp.R;
@@ -40,6 +41,33 @@ public class Helpers {
         dialog.setCancelable(false);
 
         dialog.show();
+        return dialog;
+
+    }
+
+    public static Dialog showPopup(Context context, String text) {
+        int gravity = Gravity.CENTER;
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_dialog_popup);
+
+        Window window = dialog.getWindow();
+        if(window == null) {
+            return null;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+        dialog.setCancelable(true);
+
+        TextView notiText = dialog.findViewById(R.id.notiText);
+        if(notiText != null) {
+            notiText.setText(text);
+        }
+
         return dialog;
 
     }
@@ -79,6 +107,16 @@ public class Helpers {
     public static boolean isLoggedIn(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
         return sharedPreferences.getBoolean("isLoggedIn", false);
+    }
+
+    public static void storePref(Context context, String key, String value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
+        sharedPreferences.edit().putString(key, value).apply();
+    }
+
+    public static String getPref(Context context, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
+        return sharedPreferences.getString(key, "");
     }
 
     public static boolean setTmpValue(Context context, String key, String value) {

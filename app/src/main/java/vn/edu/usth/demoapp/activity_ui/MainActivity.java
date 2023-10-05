@@ -3,19 +3,27 @@ package vn.edu.usth.demoapp.activity_ui;
 import static vn.edu.usth.demoapp.network_controller.Helpers.cleanTmpValue;
 import static vn.edu.usth.demoapp.network_controller.Helpers.storeSharedPreferenceLogout;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         if (checkFirstRun()) {
             Intent onboardingIntent = new Intent(this, OnboardingActivity.class);
             startActivity(onboardingIntent);
+            askNotificationPermission();
         } else {
             appTitle = findViewById(R.id.textViewTitle);
             appTitle.setText(getString(R.string.title_nav_home));
@@ -234,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     private boolean checkFirstRun() {
         SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
         return sharedPreferences.getBoolean("isFirstRun", true);
@@ -241,6 +251,28 @@ public class MainActivity extends AppCompatActivity {
 
     public RequestQueue getRequestQueue() {
         return requestQueue;
+    }
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "You decided to opt out of Notification", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+    private void askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED) {
+            } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                Toast.makeText(this, "Please allow notification permission", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Please allow notification permission in Settings", Toast.LENGTH_SHORT).show();
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 
 }
