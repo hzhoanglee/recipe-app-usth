@@ -29,12 +29,15 @@ import android.widget.Toast;
 import android.view.WindowManager.LayoutParams;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import vn.edu.usth.demoapp.R;
 import vn.edu.usth.demoapp.adapter_ui.ViewPagerAdapter2;
+import vn.edu.usth.demoapp.interface_controller.StatusCallback;
+import vn.edu.usth.demoapp.network_controller.RecipeController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -197,9 +200,7 @@ public class MainActivity extends AppCompatActivity {
         buttonCancel.setOnClickListener(v -> dialog.dismiss());
 
         if(type.equals("search")) {
-            // handle buttons for search dialog
             buttonSearch.setOnClickListener(v -> {
-                // get search param from editSearch
                 Toast.makeText(MainActivity.this, "Search: " + editSearch.getText().toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
                 Bundle b = new Bundle();
@@ -208,8 +209,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             });
         } else if (type.equals("request_recipe")) {
-            // handle buttons for request recipe dialog
             buttonSearch.setOnClickListener(v -> {
+                RecipeController recipeController = new RecipeController();
+                recipeController.requestFood(MainActivity.this, editSearch.getText().toString(), new StatusCallback() {
+                    @Override
+                    public void onStatusOK(boolean status) {
+                        Toast.makeText(MainActivity.this, "Request sent successfully", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "Error while sending request", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 dialog.dismiss();
                 Toast.makeText(MainActivity.this, "Thank you for requesting: " + editSearch.getText().toString(), Toast.LENGTH_SHORT).show();
             });
