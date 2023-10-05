@@ -51,7 +51,15 @@ public class SingleFoodActivity extends AppCompatActivity {
                 if(itemValue != null) {
                     String titleValue = "Recipe: " + trimContent(itemValue, 20);
                     setTitle(titleValue);
+
+
+                    setFoodCategory(b.getString("food_category"));
                     setFoodName(itemValue);
+
+                    setPrepTime(b.getString("food_prep_time"));
+                    setCookTime(b.getString("food_cook_time"));
+                    setLevel(b.getString("food_level"));
+
                     setDescription(b.getString("food_description"));
                     setFoodIngredientsAndSteps(b.getString("food_html"));
                     setRating(b.getFloat("food_rate"));
@@ -82,11 +90,18 @@ public class SingleFoodActivity extends AppCompatActivity {
 
     }
 
+
+
     private void setTitle(String title) {
         TextView textView = findViewById(R.id.textViewTitle);
         textView.setText(title);
     }
 
+
+    private void setFoodCategory(String foodCategory){
+        TextView textView = findViewById(R.id.ViewCategory);
+        textView.setText(foodCategory);
+    }
     private void setFoodName(String name) {
         TextView textView = findViewById(R.id.RecipeNameViewPhotoDetail);
         textView.setText(name);
@@ -98,6 +113,21 @@ public class SingleFoodActivity extends AppCompatActivity {
         loadImageUsingVolley(imageUrl, imageView);
     }
 
+
+    private void setPrepTime(String prepTime) {
+        TextView textView = findViewById(R.id.ViewPrepTime);
+        textView.setText(prepTime);
+    }
+
+    private void setCookTime(String cookTime) {
+        TextView textView = findViewById(R.id.ViewCookTime);
+        textView.setText(cookTime);
+    }
+
+    private void setLevel(String level) {
+        TextView textView = findViewById(R.id.ViewLevel);
+        textView.setText(level);
+    }
     private void setDescription(String description) {
         TextView textView = findViewById(R.id.DescriptionViewPhotoDetail);
         textView.setText(description);
@@ -121,6 +151,13 @@ public class SingleFoodActivity extends AppCompatActivity {
         WebView webview = findViewById(R.id.FoodWebView);
         webview.loadData(detail, "text/html", null);
     }
+
+
+
+//    private void setCategory(String category) {
+//        TextView textView = findViewById(R.id.DescriptionViewPhotoDetail);
+//        textView.setText(description);
+//    }
 
     private void setFoodId(Integer id) {
         foodId = id;
