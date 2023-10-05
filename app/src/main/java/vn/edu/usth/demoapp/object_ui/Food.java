@@ -1,12 +1,16 @@
 package vn.edu.usth.demoapp.object_ui;
 
 import android.text.Html;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Food {
@@ -24,9 +28,10 @@ public class Food {
     private String serving;
     private String level;
     private String html_content;
+    private boolean isFavourite;
 
 
-    public Food(Integer id, String urlImage, String name, float star, String description, String category, String[] ingredients, String[] steps, String prepTime, String cookTime, String serving, String level, String html_content) {
+    public Food(Integer id, String urlImage, String name, float star, String description, String category, String[] ingredients, String[] steps, String prepTime, String cookTime, String serving, String level, String html_content, boolean isFavourite) {
         this.id = id;
         this.urlImage = urlImage;
         this.name = name;
@@ -40,6 +45,7 @@ public class Food {
         this.serving = serving;
         this.level = level;
         this.html_content = html_content;
+        this.isFavourite = isFavourite;
     }
 
     public static List<Food> fromJson(String json) throws JSONException {
@@ -73,8 +79,9 @@ public class Food {
             String serving = foodObj.getString("serving");
             String level = foodObj.getString("level");
             String html_content = foodObj.getString("html");
+            boolean isFavourite = foodObj.getBoolean("is_my_favourite");
 
-            Food food = new Food(id, image, name, star, description, category, ingredients, steps, prepTime, cookTime, serving, level, html_content);
+            Food food = new Food(id, image, name, star, description, category, ingredients, steps, prepTime, cookTime, serving, level, html_content, isFavourite);
             foods.add(food);
         }
 
@@ -147,5 +154,27 @@ public class Food {
 
     public Integer getId() {
         return id;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    @NonNull
+    public String toString() {
+        return "Name: " + name + "\n" +
+                "Description: " + description + "\n" +
+                "Image: " + urlImage + "\n" +
+                "Star: " + star + "\n" +
+                "Category: " + category + "\n" +
+                "Ingredients: " + Arrays.toString(ingredients) + "\n" +
+                "Steps: " + Arrays.toString(steps) + "\n" +
+                "Prep time: " + prepTime + "\n" +
+                "Cook time: " + cookTime + "\n" +
+                "Serving: " + serving + "\n" +
+                "Level: " + level + "\n" +
+//                "Html content: " + html_content + "\n" +
+                "Is favourite: " + isFavourite + "\n";
+
     }
 }

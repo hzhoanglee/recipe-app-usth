@@ -1,5 +1,6 @@
 package vn.edu.usth.demoapp.activity_ui;
 
+import static vn.edu.usth.demoapp.network_controller.Helpers.cleanTmpValue;
 import static vn.edu.usth.demoapp.network_controller.Helpers.storeSharedPreferenceLogout;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager2 mViewPager2;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        cleanTmpValue(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

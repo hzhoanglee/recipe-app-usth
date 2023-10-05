@@ -42,8 +42,17 @@ public class RecipeController {
                 throw new RuntimeException(e);
             }
             callback.onSuccess(list);
-        }, callback::onError);
+        }, callback::onError) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + getBearerToken(context));
+                return headers;
+            }
+        };
         queue.add(stringRequest);
+
+
 
     }
 
@@ -60,64 +69,25 @@ public class RecipeController {
                 throw new RuntimeException(e);
             }
             callback.onSuccess(list);
-        }, callback::onError);
-        queue.add(stringRequest);
-    }
-
-    public void addToFavourite(Context context, int recipeID, String bearerToken, StatusCallback callback) {
-        String url = GlobalVariables.API_ENDPOINT + "favorite/save";
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-        // Create a JSONObject to hold any request parameters if needed
-        JSONObject jsonBody = new JSONObject();
-        try {
-            jsonBody.put("recipe_id", recipeID);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        // Create a StringRequest with POST method
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,
-                url,
-                response -> {
-                    Toast.makeText(context, "Added to favourite", Toast.LENGTH_SHORT).show();
-                    Log.d("Add to favourite", response);
-                    callback.onStatusOK(true);
-                },
-                error -> {
-                    Toast.makeText(context, "Failed to add to favourite", Toast.LENGTH_SHORT).show();
-                    Log.d("Add to favourite", error.toString());
-                    callback.onError(error);
-                }
-        ) {
+        }, callback::onError) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "Bearer " + getBearerToken(context));
                 return headers;
             }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                if (jsonBody != null) {
-                    return jsonBody.toString().getBytes();
-                }
-                return super.getBody();
-            }
-
-            @Override
-            public String getBodyContentType() {
-                return "application/json";
-            }
         };
-
         queue.add(stringRequest);
     }
 
     private String getBearerToken(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
         return sharedPreferences.getString("token", "");
+    }
+
+    private boolean checkLogin(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isLogin", false);
     }
 
 }

@@ -1,8 +1,11 @@
 package vn.edu.usth.demoapp.network_controller;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -73,4 +76,23 @@ public class Helpers {
         return query.replace(" ", "%20");
     }
 
+    public static boolean isLoggedIn(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isLoggedIn", false);
+    }
+
+    public static boolean setTmpValue(Context context, String key, String value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("tmpValue", MODE_PRIVATE);
+        return sharedPreferences.edit().putString(key, value).commit();
+    }
+
+    public static String getTmpValue(Context context, String key) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("tmpValue", MODE_PRIVATE);
+        return sharedPreferences.getString(key, "");
+    }
+
+    public static void cleanTmpValue(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("tmpValue", MODE_PRIVATE);
+        sharedPreferences.edit().clear().apply();
+    }
 }
