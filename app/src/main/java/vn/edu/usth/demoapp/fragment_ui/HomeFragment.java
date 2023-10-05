@@ -22,31 +22,27 @@ import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
 import vn.edu.usth.demoapp.adapter_ui.HomeCategoryAdapter;
-import vn.edu.usth.demoapp.adapter_ui.HomeFoodAdapter;
 import vn.edu.usth.demoapp.adapter_ui.PhotoAdapter;
-import vn.edu.usth.demoapp.interface_controller.FoodCallback;
-import vn.edu.usth.demoapp.interface_controller.FoodListCallback;
 import vn.edu.usth.demoapp.interface_controller.PhotoListCallback;
 import vn.edu.usth.demoapp.network_controller.FeaturedController;
-import vn.edu.usth.demoapp.network_controller.RecipeController;
 import vn.edu.usth.demoapp.object_ui.Category;
-import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.object_ui.Photo;
 import vn.edu.usth.demoapp.R;
+import vn.edu.usth.demoapp.object_ui.RecentList;
+import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
 
 public class HomeFragment extends Fragment {
 
     private View homeView;
-    List<String> imageList;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView recyclerViewVideo;
         RecyclerView recyclerViewRecent;
         RecyclerView recyclerViewCategory;
         HomeCategoryAdapter categoryAdapter;
-        HomeFoodAdapter foodAdapter;
+        FoodAdapter foodAdapter;
         CircleIndicator3 CarouselIndicator;
         ViewPager2 CarouselViewPager;
         homeView = inflater.inflate(R.layout.fragment_home, container, false);
@@ -54,7 +50,6 @@ public class HomeFragment extends Fragment {
         CarouselIndicator = homeView.findViewById(R.id.carousel_indicator);
         recyclerViewCategory = homeView.findViewById(R.id.recycler_view_category);
         recyclerViewRecent = homeView.findViewById(R.id.recycler_view_recent);
-        recyclerViewVideo = homeView.findViewById(R.id.recycler_view_video);
 
         getListPhoto(new PhotoListCallback() {
             @Override
@@ -73,10 +68,10 @@ public class HomeFragment extends Fragment {
         });
 
 
-        foodAdapter = new HomeFoodAdapter(requireContext());
+        foodAdapter = new FoodAdapter(requireContext());
         // set recent food(horizontal scroll)
         recyclerViewRecent.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        foodAdapter.setData(getListRecentFood());
+        foodAdapter.setData(RecentList.getRecentlyClickedItemsLiveData().getValue());
         recyclerViewRecent.setAdapter(foodAdapter);
 
         // set category food(horizontal scroll)
@@ -129,29 +124,4 @@ public class HomeFragment extends Fragment {
         return list;
     }
 
-    private List<Food> getListRecentFood(){
-        String tmp_url = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
-
-        List<Food> list = new ArrayList<>();
-//        list.add(new Food(tmp_url, "Appetizers", 0, "This is appetizers recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Breakfast", 0, "This is breakfast recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Main dish", 0, "This is main dish recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Side dish", 0, "This is side dish recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Desserts", 0, "This is desserts recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Drinks", 0, "This is drinks recipe that you can make at home"));
-        return list;
-    }
-
-    private List<Food> getListVideoFood(){
-        String tmp_url = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
-
-        List<Food> list = new ArrayList<>();
-//        list.add(new Food(tmp_url, "Appetizers", 0, "This is appetizers recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Breakfast", 0, "This is breakfast recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Main dish", 0, "This is main dish recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Side dish", 0, "This is side dish recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Desserts", 0, "This is desserts recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Drinks", 0, "This is drinks recipe that you can make at home"));
-        return list;
-    }
 }
