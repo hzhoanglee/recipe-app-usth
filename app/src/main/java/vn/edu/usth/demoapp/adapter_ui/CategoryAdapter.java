@@ -60,6 +60,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.imageButton.setOnClickListener(v -> {
             Bundle b = new Bundle();
             b.putString("search_param", category.getName());
+            b.putInt("category_id", category.getId());
             b.putString("type", "category");
             Intent intent = new Intent(mContext, SearchResultActivity.class);
             intent.putExtras(b);

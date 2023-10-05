@@ -57,6 +57,7 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
             Bundle b = new Bundle();
             b.putString("search_param", category.getName());
             b.putString("type", "category");
+            b.putInt("category_id", category.getId());
             Intent intent = new Intent(mContext, SearchResultActivity.class);
             intent.putExtras(b);
             mContext.startActivity(intent);

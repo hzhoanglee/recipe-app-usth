@@ -1,30 +1,24 @@
 package vn.edu.usth.demoapp.activity_ui;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import static vn.edu.usth.demoapp.network_controller.Helpers.showLoadingDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
-import org.json.JSONObject;
-
 import java.util.List;
 import java.util.Objects;
 
-import vn.edu.usth.demoapp.fragment_ui.ExploreFragment;
 import vn.edu.usth.demoapp.R;
 import vn.edu.usth.demoapp.fragment_ui.FoodListFragment;
 import vn.edu.usth.demoapp.interface_controller.FoodCallback;
 import vn.edu.usth.demoapp.interface_controller.FoodListCallback;
+import vn.edu.usth.demoapp.network_controller.CategoryController;
 import vn.edu.usth.demoapp.network_controller.RecipeController;
 import vn.edu.usth.demoapp.object_ui.Food;
 
@@ -48,13 +42,26 @@ public class SearchResultActivity extends AppCompatActivity {
         if(b != null) {
             String search_param = b.getString("search_param");
             if (Objects.equals(b.getString("type"), "category")) {
-                action = "category";
-                value = "Data for Category: " + search_param;
+                value = "Category: " + search_param;
                 title = getString(R.string.title_nav_category);
+                getListFoodByCategory(new FoodCallback() {
+                    @Override
+                    public void onFoodListReceived(List<Food> foodList) {
+                        setListFood(foodList);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new FoodListFragment(getListFood())).commit();
+                    }
+                    @Override
+                    public void onError(VolleyError error) {
+                        Toast.makeText(SearchResultActivity.this, "Error: " + error.toString(), Toast.LENGTH_LONG).show();
+                        setListFood(null);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new FoodListFragment(getListFood())).commit();
+                    }
+                }, b.getInt("category_id"));
             }
             else {
-                action = "search";
-                value = "Data for Search: " + search_param;
+                value = "Search result for: " + search_param;
                 title = getString(R.string.Search);
                 getListFood(new FoodCallback() {
                     @Override
@@ -99,6 +106,21 @@ public class SearchResultActivity extends AppCompatActivity {
     private void getListFood(FoodCallback callback, String searchQuery) {
         RecipeController recipeController = new RecipeController();
         recipeController.getSearchRecipe(this, searchQuery, new FoodListCallback() {
+            @Override
+            public void onSuccess(List<Food> result) {
+                callback.onFoodListReceived(result);
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                callback.onError(error);
+            }
+        });
+    }
+
+    private void getListFoodByCategory(FoodCallback callback, int categoryId) {
+        CategoryController categoryController = new CategoryController();
+        categoryController.getCategoryRecipe(this, categoryId, new FoodListCallback() {
             @Override
             public void onSuccess(List<Food> result) {
                 callback.onFoodListReceived(result);

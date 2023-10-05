@@ -51,9 +51,6 @@ public class RecipeController {
             }
         };
         queue.add(stringRequest);
-
-
-
     }
 
     public void getSearchRecipe(Context context, String searchQuery, FoodListCallback callback) {
