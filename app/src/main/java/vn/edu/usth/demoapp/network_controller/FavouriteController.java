@@ -17,9 +17,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import vn.edu.usth.demoapp.interface_controller.FoodListCallback;
 import vn.edu.usth.demoapp.interface_controller.StatusCallback;
+import vn.edu.usth.demoapp.object_ui.Food;
 
 public class FavouriteController {
     public void addToFavourite(Context context, int recipeID, StatusCallback callback) {
@@ -111,6 +114,29 @@ public class FavouriteController {
             }
         };
 
+        queue.add(stringRequest);
+    }
+
+    public void getFavouriteList(Context context, FoodListCallback callback) {
+        String url = GlobalVariables.API_ENDPOINT + "favorite/list";
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest stringRequest = new StringRequest(url, response -> {
+            List<Food> list;
+            try {
+                list = Food.fromFavouriteJson(response);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+            callback.onSuccess(list);
+        }, callback::onError) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + getBearerToken(context));
+                return headers;
+            }
+        };
         queue.add(stringRequest);
     }
 

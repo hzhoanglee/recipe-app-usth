@@ -88,6 +88,47 @@ public class Food {
         return foods;
     }
 
+    public static List<Food> fromFavouriteJson(String json) throws JSONException {
+        List<Food> foods = new ArrayList<>();
+
+        JSONObject obj = new JSONObject(json);
+        JSONArray data = obj.getJSONArray("data");
+
+        for(int i = 0; i < data.length(); i++) {
+            JSONObject favObject = data.getJSONObject(i);
+            JSONObject foodObj = favObject.getJSONObject("recipe");
+
+            int id = foodObj.getInt("id");
+            String name = foodObj.getString("name");
+            String description = foodObj.getString("description");
+            String image = foodObj.getString("image");
+            float star = (float) foodObj.getDouble("review");
+            JSONObject categoryObj = foodObj.getJSONObject("category");
+            String category = categoryObj.getString("name");
+            JSONArray ingredientsArr = foodObj.getJSONArray("ingredients");
+            String[] ingredients = new String[ingredientsArr.length()];
+            for(int j = 0; j < ingredientsArr.length(); j++) {
+                ingredients[j] = ingredientsArr.getString(j);
+            }
+            JSONArray stepsArr = foodObj.getJSONArray("steps");
+            String[] steps = new String[stepsArr.length()];
+            for(int j = 0; j < stepsArr.length(); j++) {
+                steps[j] = stepsArr.getString(j);
+            }
+            String prepTime = foodObj.getString("prep_time");
+            String cookTime = foodObj.getString("cook_time");
+            String serving = foodObj.getString("serving");
+            String level = foodObj.getString("level");
+            String html_content = foodObj.getString("html");
+            boolean isFavourite = foodObj.getBoolean("is_my_favourite");
+
+            Food food = new Food(id, image, name, star, description, category, ingredients, steps, prepTime, cookTime, serving, level, html_content, isFavourite);
+            foods.add(food);
+        }
+
+        return foods;
+    }
+
     public String getUrlImage() {
         return urlImage;
     }
