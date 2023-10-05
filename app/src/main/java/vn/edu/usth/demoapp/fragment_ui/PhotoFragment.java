@@ -39,18 +39,19 @@ public class PhotoFragment extends Fragment {
 
         mContext = requireContext();
 
-        loadImageUsingVolley(photo.getImgURL(), CarouselPhotoView.findViewById(R.id.imgPhoto));
+        assert photo != null;
+        loadImageUsingVolley(photo.getUrlImage(), CarouselPhotoView.findViewById(R.id.imgPhoto));
 
         ImageView imgPhoto = CarouselPhotoView.findViewById(R.id.imgPhoto);
         TextView imgText = CarouselPhotoView.findViewById(R.id.imgText);
-        imgText.setText(photo.getTextResource());
+        imgText.setText(photo.getName());
 
         imgPhoto.setOnClickListener(v -> {
             Bundle b = new Bundle();
-            b.putString("food_name", photo.getTextResource());
-            b.putString("food_url", photo.getImgURL());
-            b.putFloat("food_rate", 4.5F);
-            b.putString("food_description", "Description alo alo");
+            b.putString("food_name", photo.getName());
+            b.putString("food_url", photo.getUrlImage());
+            b.putFloat("food_rate", photo.getStar());
+            b.putString("food_description", photo.getDescription());
             b.putString("type", "recipe_item");
             Intent intent = new Intent(mContext, SingleFoodActivity.class);
             intent.putExtras(b);
