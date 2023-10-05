@@ -32,6 +32,7 @@ import java.util.List;
 
 import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
 import vn.edu.usth.demoapp.interface_controller.StatusCallback;
+import vn.edu.usth.demoapp.interface_controller.UserCallback;
 import vn.edu.usth.demoapp.network_controller.UserController;
 import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.R;
@@ -128,10 +129,24 @@ public class FavoriteFragment extends Fragment {
             EditText editUsername = dialog.findViewById(R.id.edit_username);
             EditText editPassword = dialog.findViewById(R.id.edit_password);
             EditText editRePassword = dialog.findViewById(R.id.edit_re_password);
+            EditText editEmail = dialog.findViewById(R.id.edit_email);
             buttonSearch.setOnClickListener(v -> {
                 if(!editPassword.getText().toString().equals(editRePassword.getText().toString())) {
                     Toast.makeText(requireContext(), "Error: Passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
+                } else {
+                    UserController userRegister = new UserController();
+                    userRegister.userRegister(editUsername.getText().toString(), editPassword.getText().toString(),editEmail.getText().toString(), requireContext(), new StatusCallback() {
+                        @Override
+                        public void onStatusOK(boolean status) {
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+                            Toast.makeText(requireContext(), "Register failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 Toast.makeText(requireContext(), "Welcome: " + editUsername.getText().toString(), Toast.LENGTH_SHORT).show();
                 SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
@@ -187,5 +202,7 @@ public class FavoriteFragment extends Fragment {
             }
         });
     }
+
+
 
 }
