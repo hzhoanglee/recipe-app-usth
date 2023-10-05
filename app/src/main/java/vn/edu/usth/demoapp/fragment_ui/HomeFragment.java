@@ -2,6 +2,11 @@ package vn.edu.usth.demoapp.fragment_ui;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
@@ -9,18 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
+import vn.edu.usth.demoapp.R;
+import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
 import vn.edu.usth.demoapp.adapter_ui.HomeCategoryAdapter;
 import vn.edu.usth.demoapp.adapter_ui.PhotoAdapter;
 import vn.edu.usth.demoapp.interface_controller.CategoryListCallback;
@@ -29,14 +30,13 @@ import vn.edu.usth.demoapp.network_controller.CategoryController;
 import vn.edu.usth.demoapp.network_controller.FeaturedController;
 import vn.edu.usth.demoapp.object_ui.Category;
 import vn.edu.usth.demoapp.object_ui.Photo;
-import vn.edu.usth.demoapp.R;
 import vn.edu.usth.demoapp.object_ui.RecentList;
-import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
 
 public class HomeFragment extends Fragment {
 
     private View homeView;
-
+    private Handler sliderHandler = new Handler();
+    private ViewPager2 CarouselViewPager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,12 +46,22 @@ public class HomeFragment extends Fragment {
         HomeCategoryAdapter categoryAdapter;
         FoodAdapter foodAdapter;
         CircleIndicator3 CarouselIndicator;
-        ViewPager2 CarouselViewPager;
+        //ViewPager2 CarouselViewPager;
         homeView = inflater.inflate(R.layout.fragment_home, container, false);
         CarouselViewPager = homeView.findViewById(R.id.viewPagerImageSlider);
         CarouselIndicator = homeView.findViewById(R.id.carousel_indicator);
         recyclerViewCategory = homeView.findViewById(R.id.recycler_view_category);
         recyclerViewRecent = homeView.findViewById(R.id.recycler_view_recent);
+
+        // Running Carousel
+        CarouselViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                sliderHandler.removeCallbacks(sliderRunnable);
+                sliderHandler.postDelayed(sliderRunnable, 3000);
+            }
+        });
 
         getListPhoto(new PhotoListCallback() {
             @Override
@@ -98,6 +108,13 @@ public class HomeFragment extends Fragment {
 
         return homeView;
     }
+    // Runnable
+    private Runnable sliderRunnable = new Runnable() {
+        @Override
+        public void run() {
+            CarouselViewPager.setCurrentItem(CarouselViewPager.getCurrentItem() +1);
+        }
+    };
 
     private void getListPhoto(PhotoListCallback callback) {
         FeaturedController featuredController = new FeaturedController();
