@@ -54,7 +54,6 @@ public class FavoriteFragment extends Fragment {
             mView = inflater.inflate(R.layout.fragment_favorite_login, container, false);
             Button loginButton = mView.findViewById(R.id.buttonLogin);
             loginButton.setOnClickListener(v -> {
-                // get username and password from edit text
                 EditText editUsername = mView.findViewById(R.id.editTextUsername);
                 EditText editPassword = mView.findViewById(R.id.editTextPassword);
 
@@ -168,11 +167,9 @@ public class FavoriteFragment extends Fragment {
 
     }
     private List<Food> getListFood(){
-        String tmp_url = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
 
         List<Food> list = new ArrayList<>();
-//        list.add(new Food(tmp_url, "Appetizers", randomStar(), "This is appetizers recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Breakfast", randomStar(), "This is breakfast recipe that you can make at home"));
+
 
         for (int i = 0; i < list.size(); i++) {
             int randomIndexToSwap = (int) (Math.random() * list.size());
@@ -184,24 +181,6 @@ public class FavoriteFragment extends Fragment {
         return list;
     }
 
-    private float randomStar(){
-        return (float) (Math.random() * 2 + 3);
-    }
-
-    private void userLogin(StatusCallback callback, String username, String password) {
-        UserController userController = new UserController();
-        userController.userLogin(username, password, requireContext(), new StatusCallback() {
-            @Override
-            public void onStatusOK(boolean status) {
-                callback.onStatusOK(status);
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                callback.onError(error);
-            }
-        });
-    }
 
 
 
