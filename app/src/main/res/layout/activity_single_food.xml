@@ -150,13 +150,28 @@
 
 
 
-
+            <RatingBar
+                android:id="@+id/ViewRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RecipeNameViewPhotoDetail"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="-60dp"
+                android:layout_marginTop="-12dp"
+                android:layout_marginBottom="-15dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="4.5"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar" />
 
             <RelativeLayout
                 android:id="@+id/ViewTimeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/RecipeNameViewPhotoDetail"
+                android:layout_below="@id/ViewRating"
                 android:layout_marginTop="10sp"
                 android:layout_marginBottom="30sp">
 
@@ -164,33 +179,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_centerHorizontal="true">
+                    android:layout_centerHorizontal="true"
+                    >
 
-                    <RatingBar
-                        android:id="@+id/ViewRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/RecipeNameViewPhotoDetail"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="-60dp"
-                        android:layout_marginTop="-12dp"
-                        android:layout_marginBottom="-15dp"
-                        android:isIndicator="true"
-                        android:numStars="5"
-                        android:rating="4.5"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
-                        android:stepSize="0.5"
-                        android:theme="@style/RatingBar" />
+
 
                     <TextView
                         android:id="@+id/ViewPrepTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="-30sp"
+                        android:layout_marginLeft="3sp"
                         android:text="@string/loading"
+                        android:drawableLeft="@drawable/baseline_access_time_24"
+                        android:drawableTint="@color/mainColor"
+                        android:layout_gravity="center"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
                         />
 
                     <TextView
@@ -198,9 +203,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
-                        android:layout_marginTop="5dp"
                         android:text="@string/loading"
                         android:layout_marginLeft="15sp"
+                        android:drawableLeft="@drawable/baseline_shopping_basket_24"
+                        android:drawableTint="@color/mainColor"
+                        android:layout_gravity="center"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
                         />
 
 
@@ -208,10 +217,14 @@
                         android:id="@+id/ViewLevel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:textSize="15sp"
                         android:text="@string/loading"
                         android:layout_marginLeft="15sp"
+                        android:drawableTint="@color/mainColor"
+                        android:drawableLeft="@drawable/baseline_signal_cellular_alt_24"
+                        android:layout_gravity="center"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
                         />
 
                 </LinearLayout>
