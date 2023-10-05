@@ -117,9 +117,7 @@ public class HomeFragment extends Fragment {
                 nextItem = 0;
             }
             CarouselViewPager.setCurrentItem(nextItem, true);
-            sliderHandler.postDelayed(this, 3000);
         }
-            //CarouselViewPager.setCurrentItem(CarouselViewPager.getCurrentItem() +1);
     };
 
     private void getListPhoto(PhotoListCallback callback) {
