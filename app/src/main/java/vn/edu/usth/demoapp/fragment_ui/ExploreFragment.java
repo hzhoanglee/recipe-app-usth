@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.Gravity;
@@ -31,6 +32,7 @@ import vn.edu.usth.demoapp.R;
 public class ExploreFragment extends Fragment {
 
     private List<Food> list;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +62,7 @@ public class ExploreFragment extends Fragment {
                 list = null;
             }
         });
+        handleRefresh(mView, dialog);
         return mView;
     }
 
@@ -75,6 +78,34 @@ public class ExploreFragment extends Fragment {
             public void onError(VolleyError error) {
                 callback.onError(error);
             }
+        });
+    }
+
+    private void handleRefresh(View mview, Dialog dialog) {
+        swipeContainer = (SwipeRefreshLayout) mview.findViewById(R.id.swiperefresh);
+        if (swipeContainer == null) {
+            return;
+        }
+        swipeContainer.setOnRefreshListener(() -> {
+            dialog.show();
+            getListFood(new FoodCallback() {
+                @Override
+                public void onFoodListReceived(List<Food> foodList) {
+                    FoodAdapter foodAdapter = new FoodAdapter(requireContext());
+                    foodAdapter.setData(foodList);
+                    RecyclerView rcvFood = requireActivity().findViewById(R.id.rcv_food);
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
+                    rcvFood.setLayoutManager(gridLayoutManager);
+                    rcvFood.setAdapter(foodAdapter);
+                    dialog.dismiss();
+                    swipeContainer.setRefreshing(false);
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+                    Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 

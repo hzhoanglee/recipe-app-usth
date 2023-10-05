@@ -31,7 +31,7 @@ public class CategoryController {
         return GlobalVariables.API_ENDPOINT + "categories";
     }
 
-    public void getExploreList(Context context, CategoryListCallback callback) {
+    public void getCatgoryList(Context context, CategoryListCallback callback) {
         String url = getCategoryEndpoint();
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(url, response -> {
