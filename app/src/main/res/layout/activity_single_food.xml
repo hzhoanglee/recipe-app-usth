@@ -10,8 +10,7 @@
     style="@style/Base.Theme.DemoApp"
     >
 
-    <!-- appbar with back button on the left and title next to it -->
-    <!-- on the right there is from left to right: font size button, favorite button, and share button-->
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -47,38 +46,38 @@
                 android:layout_toRightOf="@id/buttonBack"
                 />
 
-            <ImageButton
-                android:id="@+id/buttonFontSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_menu_font_size"
-                android:layout_centerVertical="true"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"
-                android:layout_toLeftOf="@id/buttonFavorite"
-                />
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/buttonFontSize"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@android:color/transparent"-->
+            <!--                android:src="@drawable/ic_menu_font_size"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:paddingBottom="4dp"-->
+            <!--                android:paddingTop="4dp"-->
+            <!--                android:layout_toLeftOf="@id/buttonFavorite"-->
+            <!--                />-->
+
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/buttonShare"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_toLeftOf="@id/buttonFavorite"-->
+            <!--                android:background="@android:color/transparent"-->
+            <!--                android:src="@drawable/ic_share"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:paddingBottom="4dp"-->
+            <!--                android:paddingTop="4dp"-->
+            <!--                android:paddingStart="10dp"-->
+            <!--                />-->
 
             <ImageButton
                 android:id="@+id/buttonFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/buttonShare"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_fav_outline"
-                android:layout_centerVertical="true"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"
-                android:paddingStart="10dp"
-                />
-
-            <ImageButton
-                android:id="@+id/buttonShare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_share"
+                android:src="@drawable/ic_fav_outline"
                 android:layout_centerVertical="true"
                 android:paddingBottom="4dp"
                 android:paddingEnd="6dp"

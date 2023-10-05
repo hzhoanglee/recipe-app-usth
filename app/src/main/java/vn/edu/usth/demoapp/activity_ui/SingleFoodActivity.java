@@ -1,5 +1,8 @@
 package vn.edu.usth.demoapp.activity_ui;
 
+import static vn.edu.usth.demoapp.network_controller.Helpers.getTmpValue;
+import static vn.edu.usth.demoapp.network_controller.Helpers.isLoggedIn;
+import static vn.edu.usth.demoapp.network_controller.Helpers.setTmpValue;
 import static vn.edu.usth.demoapp.network_controller.Helpers.trimContent;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +12,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -23,10 +27,15 @@ import com.android.volley.toolbox.Volley;
 import java.util.Objects;
 
 import vn.edu.usth.demoapp.R;
+import vn.edu.usth.demoapp.interface_controller.StatusCallback;
+import vn.edu.usth.demoapp.network_controller.FavouriteController;
+import vn.edu.usth.demoapp.network_controller.RecipeController;
 
 public class SingleFoodActivity extends AppCompatActivity {
 
     public Context mContext;
+
+    private Integer foodId;
 
 
     @Override
@@ -46,6 +55,16 @@ public class SingleFoodActivity extends AppCompatActivity {
                     setDescription(b.getString("food_description"));
                     setFoodIngredientsAndSteps(b.getString("food_html"));
                     setRating(b.getFloat("food_rate"));
+                    if(!Objects.equals(getTmpValue(this, "isFav_" + b.getInt("food_id")), "")) {
+                        if(Objects.equals(getTmpValue(this, "isFav_" + b.getInt("food_id")), "true")) {
+                            setFavourite(true);
+                        } else {
+                            setFavourite(false);
+                        }
+                    } else {
+                        setFavourite(b.getBoolean("food_favourite"));
+                    }
+                    setFoodId(b.getInt("food_id"));
 
                     // Check if an image URL is provided, and load the image using Glide
                     if (b.containsKey("food_url")) {
@@ -56,11 +75,10 @@ public class SingleFoodActivity extends AppCompatActivity {
                     Toast.makeText(mContext, "Error while loading recipe", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-
-
         }
 
         handleBack();
+        handleFavouriteButton();
 
     }
 
@@ -90,9 +108,26 @@ public class SingleFoodActivity extends AppCompatActivity {
         ratingBar.setRating(rating);
     }
 
+    public void setFavourite(boolean isFavourite) {
+        ImageButton button = findViewById(R.id.buttonFavorite);
+        if(isFavourite) {
+            button.setImageResource(R.drawable.ic_fav);
+        } else {
+            button.setImageResource(R.drawable.ic_fav_outline);
+        }
+    }
+
     private void setFoodIngredientsAndSteps(String detail) {
         WebView webview = findViewById(R.id.FoodWebView);
         webview.loadData(detail, "text/html", null);
+    }
+
+    private void setFoodId(Integer id) {
+        foodId = id;
+    }
+
+    private Integer getFoodId() {
+        return foodId;
     }
 
     private void handleBack() {
@@ -109,6 +144,50 @@ public class SingleFoodActivity extends AppCompatActivity {
             error.printStackTrace();
         });
         queue.add(imageRequest);
+    }
+
+    private void handleFavouriteButton() {
+        ImageButton button = findViewById(R.id.buttonFavorite);
+        if(button != null) {
+            button.setOnClickListener(v -> {
+                if(!isLoggedIn(this)) {
+                    Toast.makeText(mContext, "You need to login to use this feature", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                FavouriteController favouriteController = new FavouriteController();
+
+                if(button.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_fav_outline).getConstantState()) {
+                    setFavourite(true);
+                    setTmpValue(mContext, "isFav_" + getFoodId(), "true");
+                    favouriteController.addToFavourite(this, getIntent().getExtras().getInt("food_id"), new StatusCallback() {
+                        @Override
+                        public void onStatusOK(boolean status) {
+                            Toast.makeText(mContext, "Added to favourite", Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onError(VolleyError error) {
+                            Toast.makeText(mContext, "Error while adding to favourite", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else if (button.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.ic_fav).getConstantState()) {
+                    setFavourite(false);
+                    setTmpValue(mContext, "isFav_" + getFoodId(), "false");
+                    favouriteController.removeFromFavourite(this, getIntent().getExtras().getInt("food_id"), new StatusCallback() {
+                        @Override
+                        public void onStatusOK(boolean status) {
+                            Toast.makeText(mContext, "Removed from favourite", Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onError(VolleyError error) {
+                            Toast.makeText(mContext, "Error while removing from favourite", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(mContext, "Error while adding to favourite", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 }
