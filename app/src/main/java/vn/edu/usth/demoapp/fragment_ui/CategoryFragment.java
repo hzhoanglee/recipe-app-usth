@@ -67,7 +67,7 @@ public class CategoryFragment extends Fragment {
 
     private void getListCategory(CategoryCallback callback) {
         CategoryController categoryController = new CategoryController();
-        categoryController.getExploreList(requireContext(), new CategoryListCallback() {
+        categoryController.getCatgoryList(requireContext(), new CategoryListCallback() {
             @Override
             public void onSuccess(List<Category> result) {
                 callback.onCategoryListReceived(result);

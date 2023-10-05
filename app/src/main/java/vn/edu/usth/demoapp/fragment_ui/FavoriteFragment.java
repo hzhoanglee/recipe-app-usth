@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
 import vn.edu.usth.demoapp.interface_controller.StatusCallback;
@@ -53,7 +54,6 @@ public class FavoriteFragment extends Fragment {
             mView = inflater.inflate(R.layout.fragment_favorite_login, container, false);
             Button loginButton = mView.findViewById(R.id.buttonLogin);
             loginButton.setOnClickListener(v -> {
-                // get username and password from edit text
                 EditText editUsername = mView.findViewById(R.id.editTextUsername);
                 EditText editPassword = mView.findViewById(R.id.editTextPassword);
 
@@ -126,20 +126,21 @@ public class FavoriteFragment extends Fragment {
 
         if(type.equals("create_account")) {
             // handle buttons for search dialog
-            EditText editUsername = dialog.findViewById(R.id.edit_username);
-            EditText editPassword = dialog.findViewById(R.id.edit_password);
-            EditText editRePassword = dialog.findViewById(R.id.edit_re_password);
-            EditText editEmail = dialog.findViewById(R.id.edit_email);
+            EditText regUsername = dialog.findViewById(R.id.edit_username);
+            EditText regPassword = dialog.findViewById(R.id.edit_password);
+            EditText regRePassword = dialog.findViewById(R.id.edit_re_password);
+            EditText regEmail = dialog.findViewById(R.id.edit_email);
             buttonSearch.setOnClickListener(v -> {
-                if(!editPassword.getText().toString().equals(editRePassword.getText().toString())) {
+                if(!regPassword.getText().toString().equals(regRePassword.getText().toString())) {
                     Toast.makeText(requireContext(), "Error: Passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     UserController userRegister = new UserController();
-                    userRegister.userRegister(editUsername.getText().toString(), editPassword.getText().toString(),editEmail.getText().toString(), requireContext(), new StatusCallback() {
+                    userRegister.userRegister(regUsername.getText().toString(), regPassword.getText().toString(),regEmail.getText().toString(), requireContext(), new StatusCallback() {
                         @Override
                         public void onStatusOK(boolean status) {
                             dialog.dismiss();
+                            Toast.makeText(requireContext(), "Register success", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -148,15 +149,13 @@ public class FavoriteFragment extends Fragment {
                         }
                     });
                 }
-                Toast.makeText(requireContext(), "Welcome: " + editUsername.getText().toString(), Toast.LENGTH_SHORT).show();
-                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("isLoggedIn", true);
-                editor.apply();
 
-                Intent intent = requireActivity().getIntent();
-                requireActivity().finish();
-                startActivity(intent);
+                EditText editTextUsername = requireActivity().findViewById(R.id.editTextUsername);
+                editTextUsername.setText(regEmail.getText().toString());
+                EditText editTextPassword = requireActivity().findViewById(R.id.editTextPassword);
+                editTextPassword.setText(regPassword.getText().toString());
+
+
             });
 
         } else {
@@ -168,11 +167,9 @@ public class FavoriteFragment extends Fragment {
 
     }
     private List<Food> getListFood(){
-        String tmp_url = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
 
         List<Food> list = new ArrayList<>();
-//        list.add(new Food(tmp_url, "Appetizers", randomStar(), "This is appetizers recipe that you can make at home"));
-//        list.add(new Food(tmp_url, "Breakfast", randomStar(), "This is breakfast recipe that you can make at home"));
+
 
         for (int i = 0; i < list.size(); i++) {
             int randomIndexToSwap = (int) (Math.random() * list.size());
@@ -184,24 +181,6 @@ public class FavoriteFragment extends Fragment {
         return list;
     }
 
-    private float randomStar(){
-        return (float) (Math.random() * 2 + 3);
-    }
-
-    private void userLogin(StatusCallback callback, String username, String password) {
-        UserController userController = new UserController();
-        userController.userLogin(username, password, requireContext(), new StatusCallback() {
-            @Override
-            public void onStatusOK(boolean status) {
-                callback.onStatusOK(status);
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                callback.onError(error);
-            }
-        });
-    }
 
 
 
