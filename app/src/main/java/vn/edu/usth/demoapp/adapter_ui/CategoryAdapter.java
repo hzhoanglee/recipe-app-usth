@@ -3,14 +3,20 @@ package vn.edu.usth.demoapp.adapter_ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.List;
 
@@ -47,8 +53,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             return;
         }
 
-        holder.imgCategory.setImageResource(category.getResourceId());
         holder.nameCategory.setText(category.getName());
+//        Log.i("Category", category.getUrlImage());
+        loadImageUsingVolley(category.getUrlImage(), holder.imgCategory);
 
         holder.imageButton.setOnClickListener(v -> {
             Bundle b = new Bundle();
@@ -68,7 +75,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return 0;
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder {
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgCategory;
         private TextView nameCategory;
         private View imageButton;
@@ -81,6 +88,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
 
 
+    }
+
+    public void loadImageUsingVolley(String url, ImageView imageView) {
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        ImageRequest imageRequest = new ImageRequest(url, response -> {
+            imageView.setImageBitmap(response);
+//            progressBar.setVisibility(View.GONE);
+        }, 0, 0, ImageView.ScaleType.CENTER_CROP, null, error -> {
+            Toast.makeText(mContext, "Error while loading image", Toast.LENGTH_SHORT).show();
+            error.printStackTrace();
+        });
+        queue.add(imageRequest);
     }
 
 }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageButton;
@@ -63,6 +64,7 @@ public class SingleFoodActivity extends AppCompatActivity {
                     setDescription(b.getString("food_description"));
                     setFoodIngredientsAndSteps(b.getString("food_html"));
                     setRating(b.getFloat("food_rate"));
+                    Log.d("SingleFoodActivity", "onCreate: " + b.getString("food_name") + "isFav_" + b.getBoolean("food_favourite"));
                     if(!Objects.equals(getTmpValue(this, "isFav_" + b.getInt("food_id")), "")) {
                         if(Objects.equals(getTmpValue(this, "isFav_" + b.getInt("food_id")), "true")) {
                             setFavourite(true);
