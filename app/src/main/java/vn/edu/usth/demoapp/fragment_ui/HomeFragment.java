@@ -130,12 +130,12 @@ public class HomeFragment extends Fragment {
 
     private List<Category> getListTypeFood(){
         List<Category> list = new ArrayList<>();
-        list.add(new Category(R.drawable.appetizers, "Appetizers"));
-        list.add(new Category(R.drawable.breakfast, "Breakfast"));
-        list.add(new Category(R.drawable.main_dish, "Main dish"));
-        list.add(new Category(R.drawable.side_dish, "Side dish"));
-        list.add(new Category(R.drawable.desserts, "Desserts"));
-        list.add(new Category(R.drawable.drinks, "Drinks"));
+//        list.add(new Category(R.drawable.appetizers, "Appetizers"));
+//        list.add(new Category(R.drawable.breakfast, "Breakfast"));
+//        list.add(new Category(R.drawable.main_dish, "Main dish"));
+//        list.add(new Category(R.drawable.side_dish, "Side dish"));
+//        list.add(new Category(R.drawable.desserts, "Desserts"));
+//        list.add(new Category(R.drawable.drinks, "Drinks"));
         return list;
     }
 

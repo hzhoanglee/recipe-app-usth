@@ -14,8 +14,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 
 import vn.edu.usth.demoapp.R;
 import vn.edu.usth.demoapp.activity_ui.MainActivity;
@@ -132,5 +137,14 @@ public class Helpers {
     public static void cleanTmpValue(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("tmpValue", MODE_PRIVATE);
         sharedPreferences.edit().clear().apply();
+    }
+
+    public static void loadImageUsingVolley(Context context, String url, ImageView imageView) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        ImageRequest imageRequest = new ImageRequest(url, imageView::setImageBitmap, 0, 0, ImageView.ScaleType.CENTER_CROP, null, error -> {
+            Toast.makeText(context, "Error while loading image", Toast.LENGTH_SHORT).show();
+            error.printStackTrace();
+        });
+        queue.add(imageRequest);
     }
 }
