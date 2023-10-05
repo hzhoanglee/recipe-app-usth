@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
 import vn.edu.usth.demoapp.interface_controller.StatusCallback;
@@ -126,20 +127,21 @@ public class FavoriteFragment extends Fragment {
 
         if(type.equals("create_account")) {
             // handle buttons for search dialog
-            EditText editUsername = dialog.findViewById(R.id.edit_username);
-            EditText editPassword = dialog.findViewById(R.id.edit_password);
-            EditText editRePassword = dialog.findViewById(R.id.edit_re_password);
-            EditText editEmail = dialog.findViewById(R.id.edit_email);
+            EditText regUsername = dialog.findViewById(R.id.edit_username);
+            EditText regPassword = dialog.findViewById(R.id.edit_password);
+            EditText regRePassword = dialog.findViewById(R.id.edit_re_password);
+            EditText regEmail = dialog.findViewById(R.id.edit_email);
             buttonSearch.setOnClickListener(v -> {
-                if(!editPassword.getText().toString().equals(editRePassword.getText().toString())) {
+                if(!regPassword.getText().toString().equals(regRePassword.getText().toString())) {
                     Toast.makeText(requireContext(), "Error: Passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     UserController userRegister = new UserController();
-                    userRegister.userRegister(editUsername.getText().toString(), editPassword.getText().toString(),editEmail.getText().toString(), requireContext(), new StatusCallback() {
+                    userRegister.userRegister(regUsername.getText().toString(), regPassword.getText().toString(),regEmail.getText().toString(), requireContext(), new StatusCallback() {
                         @Override
                         public void onStatusOK(boolean status) {
                             dialog.dismiss();
+                            Toast.makeText(requireContext(), "Register success", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -148,15 +150,13 @@ public class FavoriteFragment extends Fragment {
                         }
                     });
                 }
-                Toast.makeText(requireContext(), "Welcome: " + editUsername.getText().toString(), Toast.LENGTH_SHORT).show();
-                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("myKey", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("isLoggedIn", true);
-                editor.apply();
 
-                Intent intent = requireActivity().getIntent();
-                requireActivity().finish();
-                startActivity(intent);
+                EditText editTextUsername = requireActivity().findViewById(R.id.editTextUsername);
+                editTextUsername.setText(regEmail.getText().toString());
+                EditText editTextPassword = requireActivity().findViewById(R.id.editTextPassword);
+                editTextPassword.setText(regPassword.getText().toString());
+
+
             });
 
         } else {
