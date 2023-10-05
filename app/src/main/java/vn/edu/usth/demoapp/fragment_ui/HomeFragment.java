@@ -98,8 +98,14 @@ public class HomeFragment extends Fragment {
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
-            CarouselViewPager.setCurrentItem(CarouselViewPager.getCurrentItem() +1);
+            int nextItem = CarouselViewPager.getCurrentItem() + 1;
+            if (nextItem >= CarouselViewPager.getAdapter().getItemCount()) {
+                nextItem = 0;
+            }
+            CarouselViewPager.setCurrentItem(nextItem, true);
+            sliderHandler.postDelayed(this, 3000);
         }
+            //CarouselViewPager.setCurrentItem(CarouselViewPager.getCurrentItem() +1);
     };
 
     private void getListPhoto(PhotoListCallback callback) {
