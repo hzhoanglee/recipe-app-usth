@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import vn.edu.usth.demoapp.R;
@@ -78,17 +79,22 @@ public class UserController {
         params.put("password", password);
         params.put("email", email);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                response -> {
-                    // Parse JSON
-                    JSONObject jsonObject = new JSONObject(params);
+            response -> {
+                // Parse JSON
+                JSONObject jsonObject = new JSONObject(params);
 
+                Toast.makeText(context, "Logged in as " + username, Toast.LENGTH_SHORT).show();
+                callback.onStatusOK(true);
+            }, error -> {
+            try {
+                JSONObject jsonObject = new JSONObject(new String(error.networkResponse.data));
+                Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(context, "Logged in as " + username, Toast.LENGTH_SHORT).show();
-                    callback.onStatusOK(true);
-                }, error -> {
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
             callback.onError(error);
-            Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
-        }) {
+            }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

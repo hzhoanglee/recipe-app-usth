@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,14 +33,19 @@ import java.util.List;
 import java.util.Objects;
 
 import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
+import vn.edu.usth.demoapp.interface_controller.FoodCallback;
+import vn.edu.usth.demoapp.interface_controller.FoodListCallback;
 import vn.edu.usth.demoapp.interface_controller.StatusCallback;
 import vn.edu.usth.demoapp.interface_controller.UserCallback;
+import vn.edu.usth.demoapp.network_controller.FavouriteController;
+import vn.edu.usth.demoapp.network_controller.RecipeController;
 import vn.edu.usth.demoapp.network_controller.UserController;
 import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.R;
 
 public class FavoriteFragment extends Fragment {
 
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -85,11 +91,20 @@ public class FavoriteFragment extends Fragment {
 
             GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
             rcvFood.setLayoutManager(gridLayoutManager);
-            //List<Food> list = getListFood();
 
-            foodAdapter.setData(getListFood());
-            rcvFood.setAdapter(foodAdapter);
+            getListFood(new FoodCallback() {
+                @Override
+                public void onFoodListReceived(List<Food> foodList) {
+                    foodAdapter.setData(foodList);
+                    rcvFood.setAdapter(foodAdapter);
+                }
 
+                @Override
+                public void onError(VolleyError error) {
+                    Toast.makeText(requireContext(), "Error: Cannot get food list", Toast.LENGTH_SHORT).show();
+                }
+            });
+            handleRefresh(mView);
             return mView;
         }
 
@@ -166,22 +181,45 @@ public class FavoriteFragment extends Fragment {
         dialog.show();
 
     }
-    private List<Food> getListFood(){
+    private void getListFood(FoodCallback callback) {
+        FavouriteController favouriteController = new FavouriteController();
+        favouriteController.getFavouriteList(requireContext(), new FoodListCallback() {
+            @Override
+            public void onSuccess(List<Food> result) {
+                callback.onFoodListReceived(result);
+            }
 
-        List<Food> list = new ArrayList<>();
-
-
-        for (int i = 0; i < list.size(); i++) {
-            int randomIndexToSwap = (int) (Math.random() * list.size());
-            Food temp = list.get(randomIndexToSwap);
-            list.set(randomIndexToSwap, list.get(i));
-            list.set(i, temp);
-        }
-
-        return list;
+            @Override
+            public void onError(VolleyError error) {
+                callback.onError(error);
+            }
+        });
     }
 
+    private void handleRefresh(View mview) {
+        swipeContainer = (SwipeRefreshLayout) mview.findViewById(R.id.swiperefresh);
+        if (swipeContainer == null) {
+            return;
+        }
+        swipeContainer.setOnRefreshListener(() -> {
+            getListFood(new FoodCallback() {
+                @Override
+                public void onFoodListReceived(List<Food> foodList) {
+                    FoodAdapter foodAdapter = new FoodAdapter(requireContext());
+                    foodAdapter.setData(foodList);
+                    RecyclerView rcvFood = requireActivity().findViewById(R.id.rcv_food);
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
+                    rcvFood.setLayoutManager(gridLayoutManager);
+                    rcvFood.setAdapter(foodAdapter);
+                    swipeContainer.setRefreshing(false);
+                }
 
-
+                @Override
+                public void onError(VolleyError error) {
+                    Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+    }
 
 }
