@@ -50,6 +50,7 @@
     <string name="password_hint">Password</string>
     <string name="re_password_hint">Re-enter your password</string>
     <string name="username_hint">Username</string>
+    <string name="email_hint">User Email</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->

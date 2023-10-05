@@ -69,6 +69,38 @@ public class UserController {
         queue.add(stringRequest);
     }
 
+    public void userRegister(String username, String password, String email, Context context, StatusCallback callback) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = context.getString(R.string.api_endpoint) + "auth/register";
+
+        Map<String, String> params = new HashMap<>();
+        params.put("username", username);
+        params.put("password", password);
+        params.put("email", email);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    // Parse JSON
+                    JSONObject jsonObject = new JSONObject(params);
+
+
+                    Toast.makeText(context, "Logged in as " + username, Toast.LENGTH_SHORT).show();
+                    callback.onStatusOK(true);
+                }, error -> {
+            callback.onError(error);
+            Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", username);
+                params.put("password", password);
+                params.put("email", email);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
     private void registerFirebaseToken(String token, Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = context.getString(R.string.api_endpoint) + "auth/firebase?token=" + token;
