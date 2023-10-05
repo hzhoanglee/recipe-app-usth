@@ -3,6 +3,7 @@ package vn.edu.usth.demoapp.adapter_ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Observable;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
@@ -23,11 +25,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.edu.usth.demoapp.activity_ui.SingleFoodActivity;
 import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.R;
+import vn.edu.usth.demoapp.object_ui.RecentList;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
@@ -40,6 +44,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public FoodAdapter(Context mContext) {
 
         this.mContext = mContext;
+
+        RecentList.getRecentlyClickedItemsLiveData().observeForever(new Observer<List<Food>>() {
+            @Override
+            public void onChanged(List<Food> foodList) {
+                notifyDataSetChanged();
+            }
+        });
     }
 
     public void setData(List<Food> list){
@@ -84,10 +95,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             b.putString("food_prep_time", food.getPrepTime());
             b.putString("food_cook_time", food.getCookTime());
             b.putString("food_level", food.getLevel());
-            b.putBoolean("food_favourite", food.isFavourite());
             Intent intent = new Intent(mContext, SingleFoodActivity.class);
             intent.putExtras(b);
             mContext.startActivity(intent);
+            updateRecentlyClickedItems(food);
         });
 
     }
@@ -102,14 +113,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     public class FoodViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imgFood;
-        private TextView tvName;
-        private RatingBar ratingBar;
-        private TextView tv_description;
+        ImageView imgFood;
+        TextView tvName;
+        RatingBar ratingBar;
+        TextView tv_description;
 
-        private TextView tv_prepare_time;
-        private TextView tv_cook_time;
-        private TextView tv_level;
+        TextView tv_prepare_time;
+        TextView tv_cook_time;
+        TextView tv_level;
 
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -133,6 +144,29 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             error.printStackTrace();
         });
         queue.add(imageRequest);
+    }
+
+    /**
+     * Update recently clicked items
+     * @param food
+     * if the item is already in the list, move it to the top
+     * if the item is not in the list, add it to the top
+     * if the list has more than 10 items, remove the last item
+     * if the list is empty, add the item to the list unconditionally
+     */
+    public void updateRecentlyClickedItems(Food food) {
+        List<Food> currentList = RecentList.getRecentlyClickedItemsLiveData().getValue();
+        if (currentList == null) {
+            currentList = new ArrayList<>();
+        }
+        if (currentList.contains(food)) {
+            currentList.remove(food);
+        }
+        currentList.add(0, food);
+        if (currentList.size() > 10) {
+            currentList.remove(currentList.size() - 1);
+        }
+        RecentList.getRecentlyClickedItemsLiveData().setValue(currentList);
     }
 
 }
