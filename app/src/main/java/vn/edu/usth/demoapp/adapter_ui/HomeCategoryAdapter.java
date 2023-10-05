@@ -1,5 +1,8 @@
 package vn.edu.usth.demoapp.adapter_ui;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+import static vn.edu.usth.demoapp.network_controller.Helpers.loadImageUsingVolley;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,7 +50,7 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
             return;
         }
 
-        holder.imgCategory.setImageResource(category.getResourceId());
+        loadImageUsingVolley(mContext, category.getUrlImage(), holder.imgCategory);
         holder.nameCategory.setText(category.getName());
 
         holder.imageButton.setOnClickListener(v -> {

@@ -95,6 +95,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             b.putString("food_prep_time", food.getPrepTime());
             b.putString("food_cook_time", food.getCookTime());
             b.putString("food_level", food.getLevel());
+            b.putBoolean("food_favourite", food.isFavourite());
             Intent intent = new Intent(mContext, SingleFoodActivity.class);
             intent.putExtras(b);
             mContext.startActivity(intent);

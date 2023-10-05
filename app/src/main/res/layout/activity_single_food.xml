@@ -126,10 +126,21 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ViewCategory"
+                android:text="@string/loading"
+                android:textSize="18sp"
+                android:layout_below="@+id/imageViewPhotoDetail"
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="-10sp"
+                />
             <!-- Recipe Name -->
             <TextView
                 android:id="@+id/RecipeNameViewPhotoDetail"
-                android:layout_below="@+id/imageViewPhotoDetail"
+                android:layout_below="@+id/ViewCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/loading"
@@ -137,36 +148,91 @@
                 android:textStyle="bold"
                 />
 
-            <RatingBar
-                android:id="@+id/ViewRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/RecipeNameViewPhotoDetail"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="-54dp"
-                android:layout_marginTop="-15dp"
-                android:layout_marginBottom="-15dp"
-                android:isIndicator="true"
-                android:numStars="5"
-                android:rating="4.5"
-                android:scaleX="0.5"
-                android:scaleY="0.5"
-                android:stepSize="0.5"
-                android:theme="@style/RatingBar"/>
 
-            <!-- View count -->
-            <TextView
-                android:id="@+id/ViewCountViewPhotoDetail"
-                android:layout_below="@+id/ViewRating"
+
+
+
+            <RelativeLayout
+                android:id="@+id/ViewTimeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/description"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                />
+                android:layout_below="@id/RecipeNameViewPhotoDetail"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="30sp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true">
+
+                    <RatingBar
+                        android:id="@+id/ViewRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/RecipeNameViewPhotoDetail"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="-60dp"
+                        android:layout_marginTop="-12dp"
+                        android:layout_marginBottom="-15dp"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="4.5"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:stepSize="0.5"
+                        android:theme="@style/RatingBar" />
+
+                    <TextView
+                        android:id="@+id/ViewPrepTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="-30sp"
+                        android:text="@string/loading"
+                        />
+
+                    <TextView
+                        android:id="@+id/ViewCookTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/loading"
+                        android:layout_marginLeft="15sp"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/ViewLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textSize="15sp"
+                        android:text="@string/loading"
+                        android:layout_marginLeft="15sp"
+                        />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <!-- View count -->
 
 
             <!-- Ingredients -->
+            <TextView
+                android:id="@+id/ViewCountViewPhotoDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ViewTimeLayout"
+                android:layout_marginTop="-1dp"
+                android:text="@string/description"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="5sp"/>
+
             <TextView
                 android:id="@+id/DescriptionViewPhotoDetail"
                 android:layout_below="@+id/ViewCountViewPhotoDetail"
