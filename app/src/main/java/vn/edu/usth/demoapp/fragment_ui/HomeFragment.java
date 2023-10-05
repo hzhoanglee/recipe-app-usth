@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.android.volley.VolleyError;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,11 @@ import me.relex.circleindicator.CircleIndicator3;
 import vn.edu.usth.demoapp.adapter_ui.HomeCategoryAdapter;
 import vn.edu.usth.demoapp.adapter_ui.HomeFoodAdapter;
 import vn.edu.usth.demoapp.adapter_ui.PhotoAdapter;
+import vn.edu.usth.demoapp.interface_controller.FoodCallback;
+import vn.edu.usth.demoapp.interface_controller.FoodListCallback;
+import vn.edu.usth.demoapp.interface_controller.PhotoListCallback;
+import vn.edu.usth.demoapp.network_controller.FeaturedController;
+import vn.edu.usth.demoapp.network_controller.RecipeController;
 import vn.edu.usth.demoapp.object_ui.Category;
 import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.object_ui.Photo;
@@ -49,9 +56,23 @@ public class HomeFragment extends Fragment {
         recyclerViewRecent = homeView.findViewById(R.id.recycler_view_recent);
         recyclerViewVideo = homeView.findViewById(R.id.recycler_view_video);
 
-        PhotoAdapter photoAdapter = new PhotoAdapter(requireActivity(), getListPhoto());
-        CarouselViewPager.setAdapter(photoAdapter);
-        CarouselIndicator.setViewPager(CarouselViewPager);
+        getListPhoto(new PhotoListCallback() {
+            @Override
+            public void onPhotoListReceived(List<Photo> photoList) {
+                PhotoAdapter photoAdapter = new PhotoAdapter(requireActivity(), photoList);
+                CarouselViewPager.setAdapter(photoAdapter);
+                CarouselIndicator.setViewPager(CarouselViewPager);
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                PhotoAdapter photoAdapter = new PhotoAdapter(requireActivity(), null);
+                CarouselViewPager.setAdapter(photoAdapter);
+                CarouselIndicator.setViewPager(CarouselViewPager);
+            }
+        });
+
+
         foodAdapter = new HomeFoodAdapter(requireContext());
         // set recent food(horizontal scroll)
         recyclerViewRecent.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -69,14 +90,19 @@ public class HomeFragment extends Fragment {
         return homeView;
     }
 
-    private List<Photo> getListPhoto(){
-        String imgurl1 = "https://cdn.tgdd.vn/Files/2021/07/29/1371693/steak-la-gi-cac-loai-steak-ngon-va-muc-do-chin-cua-steak-202107292117365026.jpg";
+    private void getListPhoto(PhotoListCallback callback) {
+        FeaturedController featuredController = new FeaturedController();
+        FeaturedController.getFeaturedRecipe(requireContext(), new PhotoListCallback() {
+            @Override
+            public void onPhotoListReceived(List<Photo> photoList) {
+                callback.onPhotoListReceived(photoList);
+            }
 
-        List<Photo> list = new ArrayList<>();
-        list.add(new Photo(imgurl1, "Steak1"));
-        list.add(new Photo(imgurl1, "Steak2"));
-        list.add(new Photo(imgurl1, "Steak3"));
-        return list;
+            @Override
+            public void onError(VolleyError error) {
+                callback.onError(error);
+            }
+        });
     }
 
     private void handleAds() {
