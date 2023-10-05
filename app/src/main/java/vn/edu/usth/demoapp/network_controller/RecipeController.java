@@ -80,6 +80,51 @@ public class RecipeController {
         queue.add(stringRequest);
     }
 
+    public void requestFood(Context context, String foodName, StatusCallback callback) {
+        String url = GlobalVariables.API_ENDPOINT + "recipe/request";
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("name", foodName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                url,
+                response -> {
+                    callback.onStatusOK(true);
+                },
+                error -> {
+                    callback.onError(error);
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + getBearerToken(context));
+                return headers;
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                if (jsonBody != null) {
+                    return jsonBody.toString().getBytes();
+                }
+                return super.getBody();
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+
+        queue.add(stringRequest);
+    }
+
     private String getBearerToken(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("myKey", MODE_PRIVATE);
         return sharedPreferences.getString("token", "");
