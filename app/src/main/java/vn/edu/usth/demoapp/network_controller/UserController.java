@@ -72,18 +72,19 @@ public class UserController {
     public void userRegister(String username, String password, String email, Context context, StatusCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = context.getString(R.string.api_endpoint) + "auth/register";
+
+        Map<String, String> params = new HashMap<>();
+        params.put("username", username);
+        params.put("password", password);
+        params.put("email", email);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
-                    try {
-                        // Parse JSON
-                        JSONObject jsonObject = new JSONObject(response);
+                    // Parse JSON
+                    JSONObject jsonObject = new JSONObject(params);
 
 
-                        Toast.makeText(context, "Logged in as " + username, Toast.LENGTH_SHORT).show();
-                        callback.onStatusOK(true);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    Toast.makeText(context, "Logged in as " + username, Toast.LENGTH_SHORT).show();
+                    callback.onStatusOK(true);
                 }, error -> {
             callback.onError(error);
             Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
