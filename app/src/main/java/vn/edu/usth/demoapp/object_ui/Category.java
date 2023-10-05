@@ -44,9 +44,6 @@ public class Category {
     }
 
     // Setters
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
-    }
     public void setName(String name){
         this.name = name;
     }
