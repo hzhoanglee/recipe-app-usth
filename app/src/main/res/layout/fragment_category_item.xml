@@ -23,14 +23,13 @@
             android:scaleType="centerCrop"
             android:background="@android:color/transparent"
             >
-
         </ImageButton>
 
         <View
             android:id="@+id/view_category"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#65000000"/>
+            android:background="#43000000"/>
 
         <TextView
             android:id="@+id/name_category"

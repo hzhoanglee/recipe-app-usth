@@ -59,6 +59,7 @@ public class ExploreFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_explore, container, false);
         rcvFood = mView.findViewById(R.id.rcv_food);
         foodAdapter = new FoodAdapter(requireContext());
+        foodAdapter.setHasStableIds(true);
         foodAdapter.setData(listFood);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
@@ -90,6 +91,8 @@ public class ExploreFragment extends Fragment {
                 loadMoreData(mView);
             }
         });
+
+        rcvFood.setItemAnimator(null);
 
         // Find the ProgressBar by ID
         progressBar = mView.findViewById(R.id.progressBar);
