@@ -10,23 +10,24 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import java.util.List;
 
 import vn.edu.usth.demoapp.fragment_ui.PhotoFragment;
+import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.object_ui.Photo;
 
 public class PhotoAdapter extends FragmentStateAdapter {
 
-    private List<Photo> photoList;
+    private List<Photo> foodList;
 
-    public PhotoAdapter(@NonNull FragmentActivity fragmentActivity, List<Photo> photoList) {
+    public PhotoAdapter(@NonNull FragmentActivity fragmentActivity, List<Photo> foodList) {
         super(fragmentActivity);
-        this.photoList = photoList;
+        this.foodList = foodList;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        Photo photo = photoList.get(position);
+        Photo food = foodList.get(position);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("objPhoto", photo);
+        bundle.putSerializable("objFood", food);
         PhotoFragment photoFragment = new PhotoFragment();
         photoFragment.setArguments(bundle);
         return photoFragment;
@@ -34,8 +35,8 @@ public class PhotoAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        if (photoList != null) {
-            return photoList.size();
+        if (foodList != null) {
+            return foodList.size();
         }
         return 0;
     }

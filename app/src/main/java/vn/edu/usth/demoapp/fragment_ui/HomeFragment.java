@@ -29,6 +29,7 @@ import vn.edu.usth.demoapp.interface_controller.PhotoListCallback;
 import vn.edu.usth.demoapp.network_controller.CategoryController;
 import vn.edu.usth.demoapp.network_controller.FeaturedController;
 import vn.edu.usth.demoapp.object_ui.Category;
+import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.object_ui.Photo;
 import vn.edu.usth.demoapp.object_ui.RecentList;
 

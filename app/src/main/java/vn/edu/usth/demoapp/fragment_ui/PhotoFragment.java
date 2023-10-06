@@ -18,9 +18,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import vn.edu.usth.demoapp.activity_ui.SingleFoodActivity;
+import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.object_ui.Photo;
 import vn.edu.usth.demoapp.R;
+import vn.edu.usth.demoapp.object_ui.RecentList;
 
 public class PhotoFragment extends Fragment {
 
@@ -35,7 +40,7 @@ public class PhotoFragment extends Fragment {
         // Inflate the layout for this fragment
         CarouselPhotoView =  inflater.inflate(R.layout.fragment_photo, container, false);
         Bundle bundle = getArguments();
-        Photo photo =(Photo) bundle.get("objPhoto");
+        Photo photo =(Photo) bundle.get("objFood");
 
         mContext = requireContext();
 
@@ -44,7 +49,11 @@ public class PhotoFragment extends Fragment {
 
         ImageView imgPhoto = CarouselPhotoView.findViewById(R.id.imgPhoto);
         TextView imgText = CarouselPhotoView.findViewById(R.id.imgText);
+        TextView imgCategory = CarouselPhotoView.findViewById(R.id.ViewCategory);
+        TextView imgTime = CarouselPhotoView.findViewById(R.id.ViewPrepTime);
         imgText.setText(photo.getName());
+        imgCategory.setText(photo.getCategory());
+        imgTime.setText(photo.getPrepTime());
 
         imgPhoto.setOnClickListener(v -> {
             Bundle b = new Bundle();
@@ -52,7 +61,14 @@ public class PhotoFragment extends Fragment {
             b.putString("food_url", photo.getUrlImage());
             b.putFloat("food_rate", photo.getStar());
             b.putString("food_description", photo.getDescription());
+            b.putString("food_html", photo.getHtmlContent());
             b.putString("type", "recipe_item");
+            b.putInt("food_id", photo.getId());
+            b.putString("food_category", photo.getCategory());
+            b.putString("food_prep_time", photo.getPrepTime());
+            b.putString("food_cook_time", photo.getCookTime());
+            b.putString("food_level", photo.getLevel());
+            b.putBoolean("food_favourite", photo.isFavourite());
             Intent intent = new Intent(mContext, SingleFoodActivity.class);
             intent.putExtras(b);
             mContext.startActivity(intent);
@@ -78,4 +94,5 @@ public class PhotoFragment extends Fragment {
         });
         queue.add(imageRequest);
     }
+
 }

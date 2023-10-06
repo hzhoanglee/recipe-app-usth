@@ -12,6 +12,7 @@ import java.util.List;
 
 import vn.edu.usth.demoapp.interface_controller.FoodListCallback;
 import vn.edu.usth.demoapp.interface_controller.PhotoListCallback;
+import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.object_ui.Photo;
 
 public class FeaturedController {
