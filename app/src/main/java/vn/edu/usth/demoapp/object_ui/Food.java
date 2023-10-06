@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Food{
+public class Food implements java.io.Serializable{
     private Integer id;
 
     private String description;

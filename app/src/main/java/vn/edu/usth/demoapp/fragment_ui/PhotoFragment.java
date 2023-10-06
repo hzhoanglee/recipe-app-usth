@@ -40,7 +40,7 @@ public class PhotoFragment extends Fragment {
         // Inflate the layout for this fragment
         CarouselPhotoView =  inflater.inflate(R.layout.fragment_photo, container, false);
         Bundle bundle = getArguments();
-        Photo photo =(Photo) bundle.get("objFood");
+        Food photo =(Food) bundle.get("objFood");
 
         mContext = requireContext();
 
@@ -72,6 +72,7 @@ public class PhotoFragment extends Fragment {
             Intent intent = new Intent(mContext, SingleFoodActivity.class);
             intent.putExtras(b);
             mContext.startActivity(intent);
+            updateRecentlyClickedItems(photo);
         });
 
         return CarouselPhotoView;
@@ -93,6 +94,29 @@ public class PhotoFragment extends Fragment {
             error.printStackTrace();
         });
         queue.add(imageRequest);
+    }
+
+    /**
+     * Update recently clicked items
+     * @param food
+     * if the item is already in the list, move it to the top
+     * if the item is not in the list, add it to the top
+     * if the list has more than 10 items, remove the last item
+     * if the list is empty, add the item to the list unconditionally
+     */
+    public void updateRecentlyClickedItems(Food food) {
+        List<Food> currentList = RecentList.getRecentlyClickedItemsLiveData().getValue();
+        if (currentList == null) {
+            currentList = new ArrayList<>();
+        }
+        if (currentList.contains(food)) {
+            currentList.remove(food);
+        }
+        currentList.add(0, food);
+        if (currentList.size() > 10) {
+            currentList.remove(currentList.size() - 1);
+        }
+        RecentList.getRecentlyClickedItemsLiveData().setValue(currentList);
     }
 
 }

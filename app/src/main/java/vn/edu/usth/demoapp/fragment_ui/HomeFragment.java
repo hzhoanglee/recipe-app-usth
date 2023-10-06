@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
 
         getListPhoto(new PhotoListCallback() {
             @Override
-            public void onPhotoListReceived(List<Photo> photoList) {
+            public void onPhotoListReceived(List<Food> photoList) {
                 PhotoAdapter photoAdapter = new PhotoAdapter(requireActivity(), photoList);
                 CarouselViewPager.setAdapter(photoAdapter);
                 CarouselIndicator.setViewPager(CarouselViewPager);
@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment {
         FeaturedController featuredController = new FeaturedController();
         FeaturedController.getFeaturedRecipe(requireContext(), new PhotoListCallback() {
             @Override
-            public void onPhotoListReceived(List<Photo> photoList) {
+            public void onPhotoListReceived(List<Food> photoList) {
                 callback.onPhotoListReceived(photoList);
             }
 
