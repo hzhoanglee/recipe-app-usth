@@ -76,4 +76,9 @@
         <item name="android:background">@color/MainDarkText</item>
     </style>
 
+    <style name="HiddenButton">
+        <item name="android:textColor">@color/MainDarkText</item>
+        <item name="android:backgroundTint">@color/MainDarkBackground</item>
+    </style>
+
 </resources>

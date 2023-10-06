@@ -91,5 +91,10 @@
         <item name="android:background">@color/MainText</item>
     </style>
 
+    <style name="HiddenButton">
+        <item name="android:textColor">@color/MainText</item>
+        <item name="android:backgroundTint">@color/MainLightBackground</item>
+    </style>
+
 
 </resources>
