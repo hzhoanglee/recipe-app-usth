@@ -15,9 +15,9 @@ import vn.edu.usth.demoapp.object_ui.Photo;
 
 public class PhotoAdapter extends FragmentStateAdapter {
 
-    private List<Photo> foodList;
+    private List<Food> foodList;
 
-    public PhotoAdapter(@NonNull FragmentActivity fragmentActivity, List<Photo> foodList) {
+    public PhotoAdapter(@NonNull FragmentActivity fragmentActivity, List<Food> foodList) {
         super(fragmentActivity);
         this.foodList = foodList;
     }
@@ -25,7 +25,7 @@ public class PhotoAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        Photo food = foodList.get(position);
+        Food food = foodList.get(position);
         Bundle bundle = new Bundle();
         bundle.putSerializable("objFood", food);
         PhotoFragment photoFragment = new PhotoFragment();

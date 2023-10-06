@@ -24,9 +24,9 @@ public class FeaturedController {
         String url = getFeaturedUrl();
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(url, response -> {
-            List<Photo> list;
+            List<Food> list;
             try {
-                list = Photo.fromJson(response);
+                list = Food.fromJson(response);
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
