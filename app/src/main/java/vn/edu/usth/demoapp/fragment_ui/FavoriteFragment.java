@@ -88,6 +88,7 @@ public class FavoriteFragment extends Fragment {
             mView = inflater.inflate(R.layout.fragment_explore, container, false);
             rcvFood = mView.findViewById(R.id.rcv_food);
             foodAdapter = new FoodAdapter(requireContext());
+            foodAdapter.setHasStableIds(true);
 
             GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
             rcvFood.setLayoutManager(gridLayoutManager);

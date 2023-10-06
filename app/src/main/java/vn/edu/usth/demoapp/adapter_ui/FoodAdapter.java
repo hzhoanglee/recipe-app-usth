@@ -147,6 +147,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         queue.add(imageRequest);
     }
 
+    @Override
+    public long getItemId(int position) {
+        return mListFood.get(position).getId();
+    }
+
     /**
      * Update recently clicked items
      * @param food

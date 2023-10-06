@@ -228,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(VolleyError error) {
+                        Log.e("Request Recipe", error.networkResponse.toString());
                         Toast.makeText(MainActivity.this, "Error while sending request", Toast.LENGTH_SHORT).show();
                     }
                 });

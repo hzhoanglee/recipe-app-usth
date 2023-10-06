@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.volley.VolleyError;
@@ -105,6 +106,7 @@ public class HomeFragment extends Fragment {
         });
 
         handleAds();
+        handleRefresh(homeView);
 
         return homeView;
     }
@@ -159,6 +161,18 @@ public class HomeFragment extends Fragment {
                 ads.setVisibility(View.GONE);
             }
         }
+    }
+
+    private void handleRefresh(View homeView) {
+        SwipeRefreshLayout swipeContainer = (SwipeRefreshLayout) homeView.findViewById(R.id.swiperefresh);
+        if (swipeContainer == null) {
+            return;
+        }
+        swipeContainer.setOnRefreshListener(() -> {
+            swipeContainer.setRefreshing(false);
+        });
+
+
     }
 
 }

@@ -35,7 +35,7 @@
             android:id="@+id/view_category"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#65000000"/>
+            android:background="#27000000"/>
 
         <LinearLayout
             android:id="@+id/content"
@@ -54,7 +54,9 @@
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:text="@string/loading"
-                android:layout_marginBottom="30dp" />
+                android:layout_marginBottom="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
