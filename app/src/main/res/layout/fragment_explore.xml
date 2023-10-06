@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swiperefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         style="@style/ScreenBackground"
         tools:context=".fragment_ui.ExploreFragment">
 
@@ -22,9 +26,20 @@
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:nestedScrollingEnabled="false"
             />
 
+        <Button
+            android:id="@+id/btnLoadMore"
+            android:layout_below="@id/rcv_food"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/loading"
+            android:visibility="visible"
+            />
 
-    </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
