@@ -16,10 +16,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.edu.usth.demoapp.adapter_ui.FoodAdapter;
@@ -29,46 +32,74 @@ import vn.edu.usth.demoapp.network_controller.RecipeController;
 import vn.edu.usth.demoapp.object_ui.Food;
 import vn.edu.usth.demoapp.R;
 
+//cat log
+import android.util.Log;
+
 public class ExploreFragment extends Fragment {
 
-    private List<Food> list;
+    private List<Food> listFood = new ArrayList<>();
+
+    private FoodAdapter foodAdapter;
     private SwipeRefreshLayout swipeContainer;
+    private int currentPage = 1;
+    private boolean isLoading = false;
+    private ProgressBar progressBar;
+
+    private Button btnLoadMore;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         Dialog dialog = showLoadingDialog(requireContext());
-
-        FoodAdapter foodAdapter;
         RecyclerView rcvFood;
         View mView;
+
         mView = inflater.inflate(R.layout.fragment_explore, container, false);
         rcvFood = mView.findViewById(R.id.rcv_food);
         foodAdapter = new FoodAdapter(requireContext());
+        foodAdapter.setData(listFood);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
         rcvFood.setLayoutManager(gridLayoutManager);
-        getListFood(new FoodCallback() {
+        getListFood(currentPage, new FoodCallback() {
             @Override
             public void onFoodListReceived(List<Food> foodList) {
-                foodAdapter.setData(foodList);
+                for (Food food : foodList) {
+                    listFood.add(food);
+                }
+                foodAdapter.setData(listFood);
                 if(dialog != null)
                     dialog.dismiss();
                 rcvFood.setAdapter(foodAdapter);
             }
             @Override
             public void onError(VolleyError error) {
-                list = null;
+                listFood = null;
             }
         });
+
         handleRefresh(mView, dialog);
+
+        btnLoadMore = mView.findViewById(R.id.btnLoadMore);
+
+        btnLoadMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadMoreData(mView);
+            }
+        });
+
+        // Find the ProgressBar by ID
+        progressBar = mView.findViewById(R.id.progressBar);
+
         return mView;
     }
 
-    private void getListFood(FoodCallback callback) {
+    private void getListFood(int page, FoodCallback callback) {
         RecipeController recipeController = new RecipeController();
-        recipeController.getExploreList(requireContext(), new FoodListCallback() {
+        recipeController.getExploreList(requireContext(), page, new FoodListCallback() {
             @Override
             public void onSuccess(List<Food> result) {
                 callback.onFoodListReceived(result);
@@ -88,11 +119,16 @@ public class ExploreFragment extends Fragment {
         }
         swipeContainer.setOnRefreshListener(() -> {
             dialog.show();
-            getListFood(new FoodCallback() {
+            currentPage = 1;
+            btnLoadMore.setVisibility(View.VISIBLE);
+            getListFood(currentPage, new FoodCallback() {
                 @Override
                 public void onFoodListReceived(List<Food> foodList) {
-                    FoodAdapter foodAdapter = new FoodAdapter(requireContext());
-                    foodAdapter.setData(foodList);
+                    listFood.clear();
+                    for (Food food : foodList) {
+                        listFood.add(food);
+                    }
+                    foodAdapter.setData(listFood);
                     RecyclerView rcvFood = requireActivity().findViewById(R.id.rcv_food);
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
                     rcvFood.setLayoutManager(gridLayoutManager);
@@ -108,4 +144,38 @@ public class ExploreFragment extends Fragment {
             });
         });
     }
+
+    public void loadMoreData(View view) {
+        // Increment the currentPage
+        currentPage++;
+
+        if (currentPage == 4){
+            btnLoadMore.setVisibility(View.GONE);
+        }
+
+        // Show a loading dialog
+        Dialog dialog = showLoadingDialog(requireContext());
+
+        // Fetch data for the updated currentPage
+        getListFood(currentPage, new FoodCallback() {
+            @Override
+            public void onFoodListReceived(List<Food> newFoodList) {
+                // Append the new items to the existing foodList
+                for (Food food : newFoodList) {
+                    listFood.add(food);
+                }
+                foodAdapter.setData(listFood);
+
+                // Dismiss the loading dialog
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                // Handle the error, e.g., show a toast message
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

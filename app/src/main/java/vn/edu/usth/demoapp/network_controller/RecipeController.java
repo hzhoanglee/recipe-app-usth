@@ -31,8 +31,8 @@ public class RecipeController {
         return GlobalVariables.API_ENDPOINT + "recipe/explore";
     }
 
-    public void getExploreList(Context context, FoodListCallback callback) {
-        String url = getRecipeEndpoint();
+    public void getExploreList(Context context, int page, FoodListCallback callback) {
+        String url = getRecipeEndpoint() + "?page=" + page;
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(url, response -> {
             List<Food> list;
