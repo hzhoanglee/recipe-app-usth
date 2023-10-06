@@ -34,7 +34,9 @@
         android:layout_marginTop="16dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:hintEnabled="true">
+        app:hintTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:boxStrokeWidth="2dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextUsername"
@@ -44,13 +46,10 @@
             android:drawableLeft="@drawable/baseline_person_outline_24"
             android:drawablePadding="20dp"
             android:hint="@string/username_hint"
-            android:inputType="text"
-
-            />
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password TextInputLayout -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutPassword"
         android:layout_width="match_parent"
@@ -59,16 +58,19 @@
         android:layout_marginTop="16dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:hintEnabled="true">
+        android:hint="@string/password_hint"
+        app:hintTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:boxStrokeWidth="2dp"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#30ffffff"
-            android:drawableLeft="@drawable/baseline_lock_open_24"
+            android:drawableStart="@drawable/baseline_lock_open_24"
             android:drawablePadding="20dp"
-            android:hint="@string/password_hint"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
